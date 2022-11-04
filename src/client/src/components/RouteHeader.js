@@ -9,7 +9,6 @@ function RouteHeader() {
   return (
     <div className="App">
         <div className="container">
-            <h1>Navigation!</h1>
             <ul>
                 <li>
                     <Link to="/">Home</Link>
