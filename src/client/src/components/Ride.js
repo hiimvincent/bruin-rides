@@ -6,6 +6,7 @@ export default function Ride({details}) {
             <div className="desc">{details.desc}</div>
             <div className="address">{details.address}</div>
             <div className="date">Ride Date: {details.date}</div>
+            <div className="time">Time: {details.time}</div>
             <div className="grpSize">Group Size: {details.grpSize}</div>
         </div>
     )
