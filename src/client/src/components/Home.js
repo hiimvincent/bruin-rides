@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
+import logo from '../blue.png';
 
 import '../App.css';
 import RideComponent from './RideComponent'
@@ -32,8 +33,8 @@ function Home() {
 
   return (
     <div className="App">
-      <div className="container">
-        <h1>Bruin Rides</h1>
+      <div className="container"> 
+        <h2> <img src={logo} alt="Logo" width="90" /> Bruin Rides </h2>
         <div className="top">
           <input
             type="text"
