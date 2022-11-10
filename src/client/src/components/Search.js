@@ -10,8 +10,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker, TimePicker } from '@mui/x-date-pickers';
 import { Dayjs } from 'dayjs';
 
-
-
 const destLocs = [
     { value: 0, label: 'LAX' },
     { value: 1, label: 'Downtown LA' },
