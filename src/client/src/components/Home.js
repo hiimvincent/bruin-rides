@@ -3,7 +3,7 @@ import axios from "axios";
 import logo from '../blue.png';
 
 import '../App.css';
-import RideComponent from './RideComponent'
+import RideShareComponent from './RideShareComponent'
 
 function Home() {
 
@@ -16,14 +16,14 @@ function Home() {
       .catch((err) => console.log(err));
   })
 
-  const addRide = () => {
-    axios.post("http://localhost:5000/save-ride", { text })
-      .then((res) => {
-        console.log(res.data);
-        setText("");
-      })
-      .catch((err) => console.log(err));
-  }
+  // const addRide = () => {
+  //   axios.post("http://localhost:5000/save-ride", { text })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setText("");
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
 
   const deleteRide = (_id) => {
     axios.post("http://localhost:5000/delete-ride", { _id })
@@ -35,7 +35,7 @@ function Home() {
     <div className="App">
       <div className="container"> 
         <h2> <img src={logo} alt="Logo" width="90" /> Bruin Rides </h2>
-        <div className="top">
+        {/* <div className="top">
           <input
             type="text"
             placeholder='Ride info...'
@@ -43,13 +43,18 @@ function Home() {
             onChange={(e) => setText(e.target.value)} />
           <div className="add"
             onClick={addRide}>{"Add"}</div>
-        </div>
+        </div> */}
 
         <div className="list">
-          {rides.map(ride => <RideComponent
+          {rides.map(ride => <RideShareComponent
             key={ride._id}
-            text={ride.text}
-            remove={() => deleteRide(ride._id)}/>)}
+            remove={() => deleteRide(ride._id)}
+            region={ride.region}
+            destination={ride.destination}
+            date={ride.date}
+            time={ride.time}
+            desc={ride.desc}
+          />)}
         </div>
 
       </div>

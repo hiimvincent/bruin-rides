@@ -1,4 +1,4 @@
-const RideModel = require("../models/RideGroup");
+const RideModel = require("../models/RideShare");
 
 module.exports.getRides = async (req, res) => {
     const rides = await RideModel.find();
@@ -6,10 +6,8 @@ module.exports.getRides = async (req, res) => {
 }
 
 module.exports.saveRide = (req, res) => {
-    const { text } = req.body;
-
     RideModel
-        .create({ text })
+        .create(req.body)
         .then(() => res.set(201).send("Added Successfully..."))
         .catch((err) => console.log(err));
 }
@@ -24,10 +22,10 @@ module.exports.deleteRide = (req, res) => {
 }
 
 module.exports.updateRide = (req, res) => {
-    const { _id, text } = req.body;
+    const { _id, desc } = req.body;
 
     RideModel
-        .findByIdAndUpdate(_id, { text })
+        .findByIdAndUpdate(_id, { desc })
         .then(() => res.set(201).send("Updated Successfully..."))
         .catch((err) => console.log(err));
 }

@@ -1,4 +1,4 @@
-const RideModel = require("../models/Ride");
+const RideModel = require("../models/RideShare");
 
 module.exports.getAllRides = async (req, res) => {
     const rides = await RideModel.find();

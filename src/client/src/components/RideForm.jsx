@@ -2,16 +2,37 @@ import { useState } from "react";
 import "../rideform.css";
 import AddInput from "./AddInput";
 import SelectComponent from "./SelectComponent";
+import axios from "axios";
 
 const RideForm = () => {
   const [values, setValues] = useState({
     destination: "",
     date: "",
     time: "",
-    description: "",
+    desc: "",
   });
+  const destination = values.destination
+  const date = values.date
+  const time = values.time
+  const desc = values.desc
 
-  const [selectedOption, setSelectedOption] = useState("");
+  const [sel, setSel] = useState("");
+  const [region, setRegion] = useState("");
+
+  const AddRide = () => {
+    axios.post("http://localhost:5000/save-ride", { region, destination, date, time, desc })
+      .then((res) => {
+        console.log(res.data);
+        setValues({
+            destination: "",
+            date: "",
+            time: "",
+            desc: "",
+          });
+        setRegion("")
+      })
+      .catch((err) => console.log(err));
+  }
 
   const options = [
     { key: 1, value: "LAX" },
@@ -21,6 +42,8 @@ const RideForm = () => {
     { key: 5, value: "Santa Monica" },
     { key: 6, value: "Burbank" },
   ]
+
+  const locations = ["LAX", "Downtown", "Hollywood", "Koreatown", "Santa Monica", "Burbank"]
 
   const inputs = [
     {
@@ -49,7 +72,7 @@ const RideForm = () => {
     },
     {
         id: 4,
-        name: "description",
+        name: "desc",
         type: "text",
         placeholder: "Put any extra information here",
         label: "Description",
@@ -57,7 +80,8 @@ const RideForm = () => {
   ];
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    AddRide();
+    //e.preventDefault();
   };
 
   const onChange = (e) => {
@@ -68,10 +92,14 @@ const RideForm = () => {
     <div className="rform">
       <form onSubmit={handleSubmit}>
         <h1>Add Ride</h1>
+        {region}
         <SelectComponent
             options={options}
-            onChange={(item) => setSelectedOption(item)}
-            selectedKey={selectedOption}
+            onChange={(item) => {
+                setSel(item);
+                setRegion(locations[item - 1]);
+            }}
+            selectedKey={sel}
             placeholder={"What region are you going to?"}
             label="Region"
         />
