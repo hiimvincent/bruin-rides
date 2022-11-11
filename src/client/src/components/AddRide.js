@@ -4,7 +4,7 @@ import axios from "axios";
 
 import '../App.css';
 import RideComponent from './RideComponent'
-
+import RideForm from './RideForm';
 
 function AddRide() {
 
@@ -35,31 +35,7 @@ function AddRide() {
   return (
     <div className="App">
       <div className="container">
-        <h1>Add Ride</h1>
-        <form onSubmit={addRide()}>
-          <div className='form-group'>
-            <label>From: </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Location"
-              //value = TODO: retrieve "from" locations data from DB and display in drop-down menu
-            />
-            <br/>
-            <label>To: </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Location"
-              //value = TODO: retrieve "destination" locations data from DB and display in drop-down menu
-            />
-            <input 
-              type="submit"
-              className="form-control"
-              placeholder="Add"
-            />
-          </div>
-        </form>
+        <RideForm />
       </div>
     </div>
   );
