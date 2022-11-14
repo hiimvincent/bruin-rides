@@ -3,8 +3,13 @@ import "../rideform.css";
 import AddInput from "./AddInput";
 import SelectComponent from "./SelectComponent";
 import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../Auth";
+
 
 const RideForm = () => {
+  const navigate = useNavigate();
+  const { setUser, user } = useAuth();
   const [values, setValues] = useState({
     destination: "",
     date: "",
@@ -15,7 +20,7 @@ const RideForm = () => {
   const date = values.date
   const time = values.time
   const desc = values.desc
-  const riders = [];
+  const riders = [user];
 
   const [sel, setSel] = useState("");
   const [region, setRegion] = useState("");
@@ -31,6 +36,7 @@ const RideForm = () => {
             desc: "",
           });
         setRegion("")
+        navigate("/search");
       })
       .catch((err) => console.log(err));
   }
@@ -81,6 +87,7 @@ const RideForm = () => {
   ];
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     AddRide();
     //e.preventDefault();
   };
@@ -93,7 +100,6 @@ const RideForm = () => {
     <div className="rform">
       <form onSubmit={handleSubmit}>
         <h1>Add Ride</h1>
-        {region}
         <SelectComponent
             options={options}
             onChange={(item) => {

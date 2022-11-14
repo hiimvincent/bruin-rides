@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { useState, useCallback } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation} from "react-router-dom";
 import axios from "axios";
 
 
@@ -11,6 +11,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const { setUser, user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
 
   const login = useCallback(
     (e) => {

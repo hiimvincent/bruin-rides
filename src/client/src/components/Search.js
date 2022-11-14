@@ -71,7 +71,7 @@ function Search() {
       <div className="container">
         <h1>Search Rides</h1>
         <div>
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <InputLabel id="DestSelect">Destination</InputLabel>
               <Select labelId="DestSelect"  onChange={setDest}>
                   {destLocs.map(loc => <MenuItem value={loc.value}>{loc.label}</MenuItem>)}
@@ -82,7 +82,7 @@ function Search() {
               <Select labelId="DestSelect" onChange={setFrom}>
                   {fromLocs.map(loc => <MenuItem value={loc.value}>{loc.label}</MenuItem>)}
               </Select>
-            </FormControl>
+            </FormControl> */}
             <FormControl fullWidth>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker

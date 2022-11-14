@@ -22,8 +22,8 @@ const RenderedWebpage = () => {
                             <Route path="/search" element={<Search />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/signup" element={<SignUp />} />
-                            <Route path="/add" element={<AddRide />} />
                             <Route element={<RequireAuth />}>
+                                <Route path="/add" element={<AddRide />} />
                                 <Route path="/view" element={<ViewRide />} />
                             </Route>
                             
