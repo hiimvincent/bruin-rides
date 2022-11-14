@@ -6,6 +6,7 @@ module.exports.getRides = async (req, res) => {
 }
 
 module.exports.saveRide = (req, res) => {
+    console.log(req);
     RideModel
         .create(req.body)
         .then(() => res.set(201).send("Added Successfully..."))

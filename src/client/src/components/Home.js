@@ -12,19 +12,11 @@ function Home() {
   const [rides, setRides] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/get-rides")
+    axios.get("http://localhost:5000/get-all-rides")
       .then((res) => setRides(res.data))
       .catch((err) => console.log(err));
   })
 
-  // const addRide = () => {
-  //   axios.post("http://localhost:5000/save-ride", { text })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setText("");
-  //     })
-  //     .catch((err) => console.log(err));
-  // }
 
   const deleteRide = (_id) => {
     axios.post("http://localhost:5000/delete-ride", { _id })
@@ -76,61 +68,3 @@ function Home() {
 }
 
 export default Home;
-
-  /*
-    <div className="App">
-      <div className="container"> 
-        <h2> <img src={logo} alt="Logo" width="90" /> Bruin Rides </h2>
-        {/* <div className="top">
-          <input
-            type="text"
-            placeholder='Ride info...'
-            value={text}
-            onChange={(e) => setText(e.target.value)} />
-          <div className="add"
-            onClick={addRide}>{"Add"}</div>
-        </div> }
-
-        <div className="list">
-          {rides.map(ride => <RideShareComponent
-            key={ride._id}
-            remove={() => deleteRide(ride._id)}
-            region={ride.region}
-            destination={ride.destination}
-            date={ride.date}
-            time={ride.time}
-            desc={ride.desc}
-          />)}
-        </div>
-
-      </div>
-    </div>
-*/
-
-/*
-<div className="homepageAboutUs">
-<figure>
-  <img src="https://via.placeholder.com/150" alt="Trulli" style="width:40%"/>
-  <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
-</figure>
-<figure>
-  <img src="https://via.placeholder.com/150" alt="Trulli" style="width:40%"/>
-  <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
-</figure>
-
-<br></br>
-<figure>
-  <img src="https://via.placeholder.com/150" alt="Trulli" style="width:30%"/>
-  <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
-</figure>
-<figure>
-  <img src="https://via.placeholder.com/150" alt="Trulli" style="width:30%"/>
-  <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
-</figure>
-<figure>
-  <img src="https://via.placeholder.com/150" alt="Trulli" style="width:30%"/>
-  <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
-</figure>
-
-</div>
-*/

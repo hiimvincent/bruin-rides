@@ -1,6 +1,5 @@
 const express = require("express");
-const { getAllRides, getRideByID, updateDescByID, updateRidersByID } = require("../controllers/RideController");
-const { getRides, saveRide, deleteRide, updateRide } = require("../controllers/RidesController");
+const { getAllRides, getRideByID, updateDescByID, updateRidersByID, saveRide, deleteRide, updateRide } = require("../controllers/RideController");
 
 const router = express.Router();
 
@@ -14,7 +13,7 @@ router.post("/get-ride-by-id", getRideByID);
 router.get("/get-all-rides", getAllRides);
 
 //Initial Testing
-router.get("/get-rides", getRides);
+//router.get("/get-rides", getRides);
 
 router.post("/save-ride", saveRide);
 

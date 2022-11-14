@@ -7,7 +7,7 @@ import {
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import { Button } from '@mui/material';
-
+import { useAuth } from "../Auth";
 
 
 function useQuery() {
@@ -18,6 +18,7 @@ function useQuery() {
 
 function ViewRide() {
     let query = useQuery();
+    const { user, setUser } = useAuth();
     const [rideID, setRideID] = useState(query.get("rideid"));
     const [rideInfo, setRideInfo] = useState([]);
     const [desc, setDesc] = useState("");
@@ -35,14 +36,19 @@ function ViewRide() {
     }
 
     const updateRiders = () => {
-      const user_ID = 999;///TODO: REPLACE THIS WITH THE USER ID
-
-      if (!rideInfo.riders.includes(user_ID)) {
+      console.log(user);
+      if (user && !rideInfo.riders.includes(user)) {
         let riders = rideInfo.riders.map((x) => x);
-        riders.push(user_ID);
+        riders.push(user);
         axios.post("http://localhost:5000/update-riders-by-id", { rideID, riders })
         .then((res) => setRideInfo(res.data)) 
         .catch((err) => console.log(err));
+
+
+        axios.post("http://localhost:5000/auth/update-user-rides-by-id", { user, rideID })
+        .then((res) => setRideInfo(res.data)) 
+        .catch((err) => console.log(err));
+
       }
   }
     

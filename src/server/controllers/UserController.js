@@ -1,4 +1,4 @@
-const userModel = require("../models/User");
+const userModel = require("../models/Profile");
 const bcrypt = require("bcrypt");
 
 module.exports.signUp = async (req, res) => {
@@ -36,4 +36,13 @@ module.exports.logIn = async (req, res) => {
     } else {
       res.status(401).json({ error: "User does not exist" });
     }
+}
+
+module.exports.updateRides = async (req, res) => {
+  const body = req.body;
+  const user = await userModel.findById(body.user);
+  const rides = user.rides;
+  rides.push(body.rideID);
+  const userUpdated = await userModel.findByIdAndUpdate(body.user, { rides });
+  res.send(userUpdated);
 }

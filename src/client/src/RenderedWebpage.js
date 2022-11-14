@@ -20,12 +20,13 @@ const RenderedWebpage = () => {
                         <Route element={<RouteHeader />}>
                             <Route exact path="/about" element={<Home />} />
                             <Route path="/search" element={<Search />} />
-                            <Route path="/add" element={<AddRide />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/signup" element={<SignUp />} />
+                            <Route path="/add" element={<AddRide />} />
                             <Route element={<RequireAuth />}>
                                 <Route path="/view" element={<ViewRide />} />
                             </Route>
+                            
                             <Route
                                 path="*"
                                 element={<Navigate to="/search" replace />}

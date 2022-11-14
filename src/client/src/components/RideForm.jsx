@@ -15,12 +15,13 @@ const RideForm = () => {
   const date = values.date
   const time = values.time
   const desc = values.desc
+  const riders = [];
 
   const [sel, setSel] = useState("");
   const [region, setRegion] = useState("");
 
   const AddRide = () => {
-    axios.post("http://localhost:5000/save-ride", { region, destination, date, time, desc })
+    axios.post("http://localhost:5000/save-ride", { region, destination, date, time, desc, riders })
       .then((res) => {
         console.log(res.data);
         setValues({
