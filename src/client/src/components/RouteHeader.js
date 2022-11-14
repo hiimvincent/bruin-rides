@@ -7,7 +7,7 @@ import { Button } from '@mui/material';
 import { useAuth } from "../Auth";
 
 function RouteHeader() {
-    const { setUser } = useAuth();
+    const { user, setUser } = useAuth();
     const navigate = useNavigate();
 
     
@@ -21,16 +21,16 @@ function RouteHeader() {
             <div className="container">
                 <ul>
                     <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
                         <Link to="/search">Search</Link>
                     </li>
                     <li>
                         <Link to="/add">Add Ride</Link>
                     </li>
+                    <li>
+                        <Link to="/about">About</Link>
+                    </li>
                 </ul>
-                <Button onClick={logout}>Log Out</Button>
+                {user ? <Button onClick={logout}>Log Out</Button> : <div/>}
                 <Outlet />
             </div>
         </div>

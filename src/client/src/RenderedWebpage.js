@@ -18,17 +18,17 @@ const RenderedWebpage = () => {
                 <Router>
                     <Routes>
                         <Route element={<RouteHeader />}>
-                            <Route exact path="/" element={<Home />} />
-                            <Route element={<RequireAuth />}>
-                                <Route path="/search" element={<Search />} />
-                            </Route>
+                            <Route exact path="/about" element={<Home />} />
+                            <Route path="/search" element={<Search />} />
                             <Route path="/add" element={<AddRide />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/signup" element={<SignUp />} />
-                            <Route path="/view" element={<ViewRide />} />
+                            <Route element={<RequireAuth />}>
+                                <Route path="/view" element={<ViewRide />} />
+                            </Route>
                             <Route
                                 path="*"
-                                element={<Navigate to="/" replace />}
+                                element={<Navigate to="/search" replace />}
                             />
                         </Route>
                     </Routes>
