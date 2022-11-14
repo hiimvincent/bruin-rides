@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 import logo from '../blue.png';
 
-import kodi from "./photo/kodi.png"
 
 import '../App.css';
 import RideShareComponent from './RideShareComponent'
