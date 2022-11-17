@@ -26,7 +26,7 @@ const Login = () => {
 
   const successfulLogin = (userID) => {
     setUser(userID)
-    navigate("/search");
+    navigate("/account");
   }
 
   return (

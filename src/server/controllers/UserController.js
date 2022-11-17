@@ -1,4 +1,5 @@
 const userModel = require("../models/Profile");
+const RideModel = require("../models/RidePost");
 const bcrypt = require("bcrypt");
 
 module.exports.signUp = async (req, res) => {
@@ -45,4 +46,20 @@ module.exports.updateRides = async (req, res) => {
   rides.push(body.rideID);
   const userUpdated = await userModel.findByIdAndUpdate(body.user, { rides });
   res.send(userUpdated);
+}
+
+module.exports.getUserRides = async (req, res) => {
+  const userID = req.body.user;
+
+  let out = []
+  const user = await userModel.findById(userID);
+
+  if (user && user.rides){
+    for (var i = 0; i < user.rides.length; i++) {
+      const rideID = user.rides[i];
+      const ride = await RideModel.findById(rideID);
+      out.push(ride);
+    }    
+  }
+  res.send(out);
 }

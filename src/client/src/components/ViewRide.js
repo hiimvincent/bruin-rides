@@ -48,9 +48,8 @@ function ViewRide() {
         axios.post("http://localhost:5000/auth/update-user-rides-by-id", { user, rideID })
         .then((res) => setRideInfo(res.data)) 
         .catch((err) => console.log(err));
-
-      }
-  }
+        }
+    }
     
     return (
         <div className="App">
@@ -59,12 +58,14 @@ function ViewRide() {
             </div>
 
             <div><Button variant="contained" onClick={updateRiders}>Join Ride!</Button></div>
-            <input
-            type="text"
-            placeholder='Update Ride Description...'
-            value={desc}
-            onChange={(e) => setDesc(e.target.value)} />
-            <div><Button variant="contained" onClick={updateRideDesc}>Update Ride Desc!</Button></div>
+            {user && rideInfo && rideInfo.riders && user == rideInfo.riders[0] ? 
+              <div><input
+              type="text"
+              placeholder='Update Ride Description...'
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)} />
+              <div><Button variant="contained" onClick={updateRideDesc}>Update Ride Desc!</Button></div></div> 
+            : <div/>}
 
             <div className="riders">Riders Joined: {rideInfo.riders ? rideInfo.riders.length : ""}</div>
             <div className="desc">{rideInfo.desc}</div>

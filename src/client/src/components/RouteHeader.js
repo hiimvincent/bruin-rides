@@ -23,12 +23,23 @@ function RouteHeader() {
                     <li>
                         <Link to="/search">Search</Link>
                     </li>
+                    {user ? 
                     <li>
                         <Link to="/add">Add Ride</Link>
                     </li>
+                    : <div/>}
                     <li>
                         <Link to="/about">About</Link>
                     </li>
+                    {user ? 
+                    <li>
+                        <Link to="/account">My Account</Link>
+                    </li> 
+                    :
+                    <li>
+                        <Link to="/login">Login</Link>
+                    </li>
+                    }
                 </ul>
                 {user ? <Button onClick={logout}>Log Out</Button> : <div/>}
                 <Outlet />

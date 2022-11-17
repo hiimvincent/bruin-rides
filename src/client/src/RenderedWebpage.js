@@ -9,6 +9,7 @@ import ViewRide from "./components/ViewRide";
 import Login from "./components/Login";
 import { AuthProvider, RequireAuth } from "./Auth";
 import SignUp from "./components/SignUp";
+import Account from "./components/Account";
 
 
 const RenderedWebpage = () => {
@@ -23,6 +24,7 @@ const RenderedWebpage = () => {
                             <Route path="/login" element={<Login />} />
                             <Route path="/signup" element={<SignUp />} />
                             <Route element={<RequireAuth />}>
+                                <Route path="/account" element={<Account />} />
                                 <Route path="/add" element={<AddRide />} />
                                 <Route path="/view" element={<ViewRide />} />
                             </Route>
