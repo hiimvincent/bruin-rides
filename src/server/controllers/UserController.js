@@ -1,5 +1,5 @@
 const userModel = require("../models/Profile");
-const RideModel = require("../models/RidePost");
+const RideModel = require("../models/RideSchema");
 const bcrypt = require("bcrypt");
 
 module.exports.signUp = async (req, res) => {
@@ -57,9 +57,14 @@ module.exports.getUserRides = async (req, res) => {
   if (user && user.rides){
     for (var i = 0; i < user.rides.length; i++) {
       const rideID = user.rides[i];
-      const ride = await RideModel.findById(rideID);
-      out.push(ride);
+      if (rideID){
+        const ride = await RideModel.findById(rideID);
+        if (ride){
+          out.push(ride);
+        }
+      }
     }    
   }
+  console.log(out)
   res.send(out);
 }

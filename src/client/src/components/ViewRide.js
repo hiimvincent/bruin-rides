@@ -37,7 +37,7 @@ function ViewRide() {
 
     const updateRiders = () => {
       console.log(user);
-      if (user && !rideInfo.riders.includes(user)) {
+      if (user && !rideInfo.riders.includes(user) && rideInfo.riders.length < rideInfo.grpSize) {
         let riders = rideInfo.riders.map((x) => x);
         riders.push(user);
         axios.post("http://localhost:5000/update-riders-by-id", { rideID, riders })

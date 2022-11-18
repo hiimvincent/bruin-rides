@@ -15,28 +15,37 @@ const RideForm = () => {
     date: "",
     time: "",
     desc: "",
+    grpSize: 0
   });
   const destination = values.destination
   const date = values.date
   const time = values.time
   const desc = values.desc
+  const grpSize = values.grpSize
   const riders = [user];
 
   const [sel, setSel] = useState("");
   const [region, setRegion] = useState("");
 
   const AddRide = () => {
-    axios.post("http://localhost:5000/save-ride", { region, destination, date, time, desc, riders })
+    axios.post("http://localhost:5000/save-ride", { region, destination, date, time, desc, grpSize, riders })
       .then((res) => {
-        console.log(res.data);
-        setValues({
+        console.log(res.data_id);
+        const rideID = res.data._id
+        console.log({user, rideID})
+        axios.post("http://localhost:5000/auth/update-user-rides-by-id", { user, rideID })
+        .then((res) => {
+          setValues({
             destination: "",
             date: "",
             time: "",
             desc: "",
+            grpSize: 0
           });
-        setRegion("")
-        navigate("/search");
+          setRegion("")
+          navigate("/search");
+        }) 
+        .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   }
@@ -63,6 +72,14 @@ const RideForm = () => {
     },
     {
       id: 2,
+      name: "grpSize",
+      type: "number",
+      placeholder: "Group Limit",
+      label: "Group Limit",
+      required: true,
+    },
+    {
+      id: 3,
       name: "date",
       type: "date",
       placeholder: "Date",
@@ -70,7 +87,7 @@ const RideForm = () => {
       required: true,
     },
     {
-        id: 3,
+        id: 4,
         name: "time",
         type: "time",
         placeholder: "Time",
@@ -78,16 +95,18 @@ const RideForm = () => {
         required: true,
     },
     {
-        id: 4,
+        id: 5,
         name: "desc",
         type: "text",
         placeholder: "Put any extra information here",
         label: "Description",
     },
+    
   ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(inputs)
     AddRide();
     //e.preventDefault();
   };

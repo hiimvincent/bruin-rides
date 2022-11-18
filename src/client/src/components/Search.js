@@ -111,7 +111,7 @@ function Search() {
         </div>
 
         <div className="list">
-            {allRides.filter(ride => (dest == null ? true : ride.dest == dest.target.value) 
+            {allRides.filter(ride => (ride.dest == null ? true : ride.dest == dest.target.value) 
                             && (from == null ? true : ride.meetPlc == from.target.value)
                             && (Date.parse(ride.date) > Date.parse(dateFilter))
                             && (toTimeFilter == null ? true : ((toTimeFilter.target.value) <= parseInt(ride.time.substring(0, ride.time.indexOf(":")))))

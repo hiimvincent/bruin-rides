@@ -13,7 +13,7 @@ export default function Ride({details}) {
 
     const updateRiders = () => {
         console.log(details);
-        if (user && !details.riders.includes(user)) {
+        if (user && !details.riders.includes(user) && details.riders.length < details.grpSize) {
             const rideID = details._id
             let riders = details.riders.map((x) => x);
             riders.push(user);
