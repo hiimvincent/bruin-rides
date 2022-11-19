@@ -5,10 +5,13 @@
 }
 
 input {
-    padding: 15px;
-    margin: 10px 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 0px;
+    margin: 10px 0px 20px 0px;
     border-radius: 5px;
     border: 1px solid gray;
+    width: 100%;
 }
 
 

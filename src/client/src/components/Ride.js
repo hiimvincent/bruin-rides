@@ -34,12 +34,12 @@ export default function Ride({details}) {
 
     return (
         <div className="item">
-            <div className="desc">{details.desc}</div>
-            <div className="address">{details.address}</div>
+            <div className="address">Region: {details.region}</div>
+            <div className="address">Destination: {details.destination}</div>
             <div className="date">Ride Date: {details.date}</div>
             <div className="time">Time: {details.time}</div>
-            <div className="grpSize">Group Size: {details.grpSize}</div>
-            <div className="grpSize"># of Riders: {details.riders.length}</div>
+            <div className="grpSize">Riders: {details.riders.length} / {details.grpSize}</div>
+            <div className="desc">Description: {details.desc}</div>
             <Button variant="contained" color="primary" sx={{color: 'black', backgroundColor: 'white', fontWeight: 'bold', m: 1}}  onClick={updateRiders}>Quick Join</Button>
             <Button component={Link} to={"/view?rideid=" + details._id} variant="contained" color="primary" sx={{m: 1}} >More Details</Button>
         </div>

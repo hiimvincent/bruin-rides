@@ -73,6 +73,13 @@ function ViewRide() {
             <div className="date">Ride Date: {rideInfo.date}</div>
             <div className="time">Time: {rideInfo.time}</div>
             <div className="grpSize">Group Size: {rideInfo.grpSize}</div>
+
+            <div className="address">Region: {rideInfo.region}</div>
+            <div className="address">Destination: {rideInfo.destination}</div>
+            <div className="date">Ride Date: {rideInfo.date}</div>
+            <div className="time">Time: {rideInfo.time}</div>
+            <div className="grpSize">Riders: {rideInfo.riders.length} / {rideInfo.grpSize}</div>
+            <div className="desc">Description: {rideInfo.desc}</div>
         </div>
         );
 }
