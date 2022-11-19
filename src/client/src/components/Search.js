@@ -74,8 +74,8 @@ function Search() {
       <div className="container">
         <h1>Search Rides</h1>
         <div>
-            <FormControl fullWidth>
-              <InputLabel id="DestSelect">Region</InputLabel>
+            <FormControl fullWidth sx={{m: 1}}>
+              <InputLabel id="DestSelect" >Region</InputLabel>
               <Select labelId="DestSelect"  onChange={setDest}>
                   {destLocs.map(loc => <MenuItem value={loc.value}>{loc.value}</MenuItem>)}
               </Select>
@@ -86,7 +86,7 @@ function Search() {
                   {fromLocs.map(loc => <MenuItem value={loc.value}>{loc.label}</MenuItem>)}
               </Select>
             </FormControl> */}
-            <FormControl fullWidth>
+            <FormControl fullWidth sx={{m: 1}}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                       label="Date"
@@ -98,13 +98,13 @@ function Search() {
                   />
               </LocalizationProvider>
             </FormControl>
-            <FormControl fullWidth>
+            <FormControl fullWidth sx={{m: 1}}>
               <InputLabel id="ToSelect">From Time</InputLabel>
               <Select labelId="ToSelect"  options={fromLocs} onChange={setToTimeFilter}>
                   {timeOpts.map(loc => <MenuItem value={loc.value}>{loc.label}</MenuItem>)}
               </Select>
             </FormControl>
-            <FormControl fullWidth>
+            <FormControl fullWidth sx={{m: 1}}>
               <InputLabel id="FromSelect">To Time</InputLabel>
               <Select labelId="FromSelect" options={fromLocs} onChange={setFromTimeFilter}>
                   {timeOpts.map(loc => <MenuItem value={loc.value}>{loc.label}</MenuItem>)}

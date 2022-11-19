@@ -9,6 +9,13 @@
   padding: 0 1rem;
 }
 
+.button {
+  padding: 15px 32px; 
+}
+
+p {
+  font-size: 25px;
+}
 h1 {
   margin-top: 1.8rem;
   margin-bottom: 1.8rem;
@@ -117,5 +124,5 @@ li a {
 }
 
 li a:hover {
-  background-color: #FFD100;
+  background-color: #2774AE;
 }

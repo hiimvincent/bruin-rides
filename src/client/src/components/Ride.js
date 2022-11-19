@@ -40,8 +40,8 @@ export default function Ride({details}) {
             <div className="time">Time: {details.time}</div>
             <div className="grpSize">Group Size: {details.grpSize}</div>
             <div className="grpSize"># of Riders: {details.riders.length}</div>
-            <Button variant="contained" color="primary" onClick={updateRiders}>Quick Join!</Button>
-            <Button component={Link} to={"/view?rideid=" + details._id} variant="contained" color="primary">More Details</Button>
+            <Button variant="contained" color="primary" sx={{color: 'black', backgroundColor: 'white', fontWeight: 'bold', m: 1}}  onClick={updateRiders}>Quick Join</Button>
+            <Button component={Link} to={"/view?rideid=" + details._id} variant="contained" color="primary" sx={{m: 1}} >More Details</Button>
         </div>
     )
 }
