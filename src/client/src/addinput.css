@@ -1,0 +1,36 @@
+.addinput {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+input {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 0px;
+    margin: 10px 0px 20px 0px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    width: 100%;
+}
+
+
+label {
+    font-size: 12px;
+    color: gray;
+}
+
+span {
+    font-size: 12px;
+    padding: 3px;
+    color: red;
+    display: none;
+}
+
+input:invalid[focused="true"] {
+
+}
+
+input:invalid[focused="true"] ~ span {
+    display: block;
+}

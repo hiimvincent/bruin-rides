@@ -1,0 +1,33 @@
+.rform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  form {
+      background-color: white;
+      margin-top: 30px;
+      padding: 5px 70px 0px 40px;
+      border-radius: 10px;
+  }
+  
+  h1 {
+      color: #2774AE;
+      text-align: center;
+  }
+  
+  button {
+      width: 100%;
+      height: 50px;
+      padding: 10px 0px 10px 0px;
+      border: none;
+      background-color: #2774AE;
+      color: white;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 15px;
+      margin-bottom: 30px;
+  }

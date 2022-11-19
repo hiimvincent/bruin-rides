@@ -7,6 +7,8 @@ require("dotenv").config();
 const cors = require("cors");
 
 const routes = require("./routes/RidesRoute");
+const userRoutes = require("./routes/UserRoute");
+
 
 app.use(express.json());
 app.use(cors());
@@ -22,5 +24,6 @@ mongoose
     .catch((err) => console.error(err));
 
 app.use(routes);
+app.use("/auth/", userRoutes);
 
 app.listen(PORT, () => console.log("Server running on port " + PORT));
