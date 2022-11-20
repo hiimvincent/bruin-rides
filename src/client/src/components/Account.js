@@ -24,7 +24,7 @@ function Account() {
     return (
         <div className="App">
             <div className="container">
-            <h1>View Account: {user}</h1>
+            <h1>Your Account id: {user}</h1>
             <div className="list">
               {rideInfo.sort((a, b) => {
                   let d1 = Date.parse(a.date);

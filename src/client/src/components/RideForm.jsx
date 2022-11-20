@@ -118,7 +118,7 @@ const RideForm = () => {
   return (
     <div className="rform">
       <form onSubmit={handleSubmit}>
-        <h1>Add Ride</h1>
+      <h1>Add Ride</h1>
         <SelectComponent
             options={options}
             onChange={(item) => {

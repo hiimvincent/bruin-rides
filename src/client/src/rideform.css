@@ -7,12 +7,13 @@
   
   form{
       background-color: white;
-      padding: 0px 60px;
+      padding: 0px 60px 0px 60px;
       border-radius: 10px;
+      width: 900px;
   }
   
   h1{
-      color: #2774AE;
+      color: #000000;
       text-align: center;
   }
   

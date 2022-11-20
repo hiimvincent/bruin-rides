@@ -43,7 +43,7 @@ export default function Ride({details}) {
                 {capacity.map((item) => (<CapacityBar completed={item.completed} />))}
             </div>
             <div className="desc">Description: {details.desc}</div>
-            <Button variant="contained" color="primary" sx={{color: 'black', backgroundColor: 'white', fontWeight: 'bold', m: 1}}  onClick={updateRiders}>Quick Join</Button>
+            <Button variant="contained" color="primary" sx={{color: 'black', backgroundColor: 'white', fontWeight: 'bold', m: 1}}  onClick={updateRiders}>Join This Ride</Button>
             <Button component={Link} to={"/view?rideid=" + details._id} variant="contained" color="primary" sx={{m: 1}} >More Details</Button>
 
         </div>

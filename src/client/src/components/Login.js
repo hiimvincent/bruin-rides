@@ -44,7 +44,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password..."
         />
-        <Button type="submit">Login</Button>
+        <button type="submit">Login</button>
         </form>
         <div>Don't have an account?
             <Button component={Link} to="/signup">Sign Up!</Button>
