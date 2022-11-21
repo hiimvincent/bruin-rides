@@ -67,14 +67,18 @@ function ViewRide() {
               <div><Button variant="contained" onClick={updateRideDesc}>Update Ride Desc!</Button></div></div> 
             : <div/>}
 
-            <div className="riders">Riders Joined: {rideInfo.riders ? rideInfo.riders.length : ""}</div> 
-            <div className="address">{rideInfo.address}</div>
-            <div className="date">Ride Date: {rideInfo.date}</div>
-            <div className="time">Time: {rideInfo.time}</div>
-            <div className="grpSize">Group Size: {rideInfo.grpSize}</div>
-            <div className="address">Region: {rideInfo.region}</div>
-            <div className="address">Destination: {rideInfo.destination}</div>
-            <div className="desc">Description: {rideInfo.desc}</div>
+            <br/>
+            <h2 className="riders">Riders Joined: {rideInfo.riders ? rideInfo.riders.length : ""}</h2> 
+            <h2 className="grpSize">Group Size: {rideInfo.grpSize}</h2>
+            <br/>
+            <h2 className="date">Ride Date: {rideInfo.date}</h2>
+            <h2 className="time">Time: {rideInfo.time}</h2>
+            <br/>
+            <h2 className="address">Region: {rideInfo.region}</h2>
+            <h2 className="address">{rideInfo.address}</h2>
+            <h2 className="address">Destination: {rideInfo.destination}</h2>
+            <br/>
+            <h2 className="desc">Description: {rideInfo.desc}</h2>
         </div>
         );
 }
