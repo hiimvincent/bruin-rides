@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from "axios";
 import logo from '../blue.png';
 
@@ -35,21 +36,23 @@ function Home() {
   </p>
   <br></br>
   <p>
-  Whether it's sightseers looking for fun in <a href="google.com">downtown LA</a>, beach-goers headed to <a href ="google.com">Santa Monica</a>,
-  or even Bruins hoping to get a better rate on their trip to <a href="google.com">LAX</a>, 
-  Bruin Rides hopes to be the central location for students to coordinate splitting fares.
+  Whether it's sightseers looking for fun in downtown LA, beach-goers headed to Santa Monica,
+  or even Bruins hoping to get a better rate on their trip to LAX, 
+  Bruin Rides is the central location for students to coordinate splitting fares.
   </p>
   <br></br>
   <hr></hr>
   <br></br>
   <p>
-  <b>To get started</b> <a href="google.com">log in or sign up</a> and search for your ride by: destination, date, and time. 
-  </p><p>If you can't find a ride you want, take the initiative and <a href="google.com">make your own ride</a> for others to join in on. 
+  <b>To get started</b> <Link to="/login">log in or sign up</Link> and search for your ride by: destination, date, and time. 
+  </p>
+  <br></br>
+  <p>If you can't find a ride you want, take the initiative and make your own ride for others to join in on. 
   </p>
   <br></br>
   <br></br>
   <br></br>
-  <h3>Some Rides On Our Page Now</h3>
+  {/* <h3>Some Rides On Our Page Now</h3>
 </div>
 <div className="list" font-size="20px">
           {rides.map(ride => <RideShareComponent
@@ -60,7 +63,7 @@ function Home() {
             date={ride.date}
             time={ride.time}
             desc={ride.desc}
-          />)}
+          />)} */}
 </div>
 
 </div>

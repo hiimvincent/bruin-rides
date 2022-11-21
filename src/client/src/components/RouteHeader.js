@@ -40,8 +40,13 @@ function RouteHeader() {
                         <Link to="/login">Login</Link>
                     </li>
                     }
+                    {user ? 
+                    <li>
+                        <Link to="/search" onClick={logout}>Log Out</Link> 
+                    </li>
+                    : <div/>}
                 </ul>
-                {user ? <Button onClick={logout}>Log Out</Button> : <div/>}
+                
                 <Outlet />
             </div>
         </div>
