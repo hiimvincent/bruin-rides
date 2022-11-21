@@ -65,6 +65,17 @@ module.exports.getUserRides = async (req, res) => {
       }
     }    
   }
-  console.log(out)
+  res.send(out);
+}
+
+
+module.exports.getUserByIDs = async (req, res) => {
+  const userIDs = req.body.userIDs;
+  let out = []
+
+  for (var i = 0; i < userIDs.length; i++) {
+    const user = await userModel.findById(userIDs[i]);
+    out.push(user);
+  }
   res.send(out);
 }

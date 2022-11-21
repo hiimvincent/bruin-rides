@@ -20,12 +20,20 @@ function ViewRide() {
     let query = useQuery();
     const { user, setUser } = useAuth();
     const [rideID, setRideID] = useState(query.get("rideid"));
+    const [userInfo, setUserInfo] = useState([]);
     const [rideInfo, setRideInfo] = useState([]);
     const [desc, setDesc] = useState("");
 
     useEffect(() => {
         axios.post("http://localhost:5000/get-ride-by-id", { rideID })
-          .then((res) => setRideInfo(res.data)) 
+          .then((res) => {
+            setRideInfo(res.data)
+            const userIDs = res.data.riders;
+            console.log(userIDs)
+            axios.post("http://localhost:5000/auth/get-users-by-ids", { userIDs })
+            .then((result) => setUserInfo(result.data))
+            .catch((err) => console.log(err));
+          }) 
           .catch((err) => console.log(err));
       })
 
@@ -52,8 +60,8 @@ function ViewRide() {
     }
     
     const listOfRiderInfo = () =>{
-      const listItems = rideInfo.riders.map((r) =>
-        <li>{r}</li>
+      const listItems = userInfo.map((r) =>
+        <li>{r.email}</li>
       );
       return <ul>{listItems}</ul>;
     }
