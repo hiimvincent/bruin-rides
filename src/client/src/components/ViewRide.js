@@ -51,25 +51,44 @@ function ViewRide() {
         }
     }
     
+    const listOfRiderInfo = () =>{
+      const listItems = rideInfo.riders.map((r) =>
+        <li>{r}</li>
+      );
+      return <ul>{listItems}</ul>;
+    }
     return (
         <div className="App">
             <div className="container">
-            <h1>View Ride: {rideID}</h1>
+            <h1>Ride ID: {rideID}</h1>
             </div>
-
-            <div><Button variant="contained" onClick={updateRiders}>Join Ride!</Button></div>
-            {user && rideInfo && rideInfo.riders && user == rideInfo.riders[0] ? 
-              <div><input
+            <div><Button variant="contained" onClick={updateRiders}>Join Ride!</Button></div>          
+              {user && rideInfo && rideInfo.riders && user == rideInfo.riders[0] ? 
+              
+              <div>
+                <br/><br/> 
+                <h2>You Own This Ride</h2>
+                <input
               type="text"
               placeholder='Update Ride Description...'
               value={desc}
               onChange={(e) => setDesc(e.target.value)} />
               <div><Button variant="contained" onClick={updateRideDesc}>Update Ride Desc!</Button></div></div> 
             : <div/>}
+            <br/><br/>
 
-            <br/>
-            <h2 className="riders">Riders Joined: {rideInfo.riders ? rideInfo.riders.length : ""}</h2> 
-            <h2 className="grpSize">Group Size: {rideInfo.grpSize}</h2>
+            <h2 className="riders">Riders: {rideInfo.riders ? rideInfo.riders.length : "0"}/{rideInfo.grpSize}</h2> 
+            {
+              user && rideInfo && rideInfo.riders && rideInfo.riders.includes(user) ?
+              
+              <div>
+                {listOfRiderInfo()}
+              </div> 
+            :   
+            <div>
+              <h3>Join ride to see other riders </h3>
+            </div>
+            }
             <br/>
             <h2 className="date">Ride Date: {rideInfo.date}</h2>
             <h2 className="time">Time: {rideInfo.time}</h2>
