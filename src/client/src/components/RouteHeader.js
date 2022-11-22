@@ -6,6 +6,9 @@ import '../App.css';
 import { Button } from '@mui/material';
 import { useAuth } from "../Auth";
 
+import React from 'react'
+import { BsPersonCircle } from 'react-icons/bs';
+
 function RouteHeader() {
     const { user, setUser } = useAuth();
     const navigate = useNavigate();
@@ -20,31 +23,35 @@ function RouteHeader() {
         <div className="App">
             <div className="container">
                 <ul>
-                    <li>
-                        <Link to="/search">Search</Link>
-                    </li>
                     {user ? 
                     <li>
-                        <Link to="/add">Add Ride</Link>
+                        <Link to="/search" onClick={logout}>Log Out</Link> 
                     </li>
                     : <div/>}
-                    <li>
-                        <Link to="/about">About</Link>
-                    </li>
+
                     {user ? 
                     <li>
-                        <Link to="/account">My Account</Link>
+                        <Link to="/account"> <BsPersonCircle/> </Link>
                     </li> 
                     :
                     <li>
                         <Link to="/login">Login</Link>
                     </li>
                     }
+
+                    <li>
+                        <Link to="/about">About</Link>
+                    </li>
+
                     {user ? 
                     <li>
-                        <Link to="/search" onClick={logout}>Log Out</Link> 
+                        <Link to="/add">Add Ride</Link>
                     </li>
                     : <div/>}
+
+                    <li>
+                        <Link to="/search">Search</Link>
+                    </li>
                 </ul>
                 
                 <Outlet />
