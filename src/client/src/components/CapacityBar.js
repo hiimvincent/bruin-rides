@@ -22,7 +22,7 @@ const CapacityBar = (props) => {
 
   const fillerStyles = {
     height: '100%',
-    width: `${completed}%`,
+    width: `${completed > 100 ? 100 : completed}%`,
     backgroundColor: bgcolor,
     borderRadius: 'inherit',
     textAlign: 'right',

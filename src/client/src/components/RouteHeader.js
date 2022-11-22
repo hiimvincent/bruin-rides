@@ -8,6 +8,7 @@ import { useAuth } from "../Auth";
 
 import React from 'react'
 import { BsPersonCircle } from 'react-icons/bs';
+import { FiSettings } from 'react-icons/fi'
 
 function RouteHeader() {
     const { user, setUser } = useAuth();
@@ -30,9 +31,14 @@ function RouteHeader() {
                     : <div/>}
 
                     {user ? 
+                    <div>
+                    <li>
+                        <Link to="/edit"><FiSettings/></Link>
+                    </li>
                     <li>
                         <Link to="/account"> <BsPersonCircle/> </Link>
                     </li> 
+                    </div>
                     :
                     <li>
                         <Link to="/login">Login</Link>
@@ -48,6 +54,7 @@ function RouteHeader() {
                         <Link to="/add">Add Ride</Link>
                     </li>
                     : <div/>}
+                    
 
                     <li>
                         <Link to="/search">Search</Link>

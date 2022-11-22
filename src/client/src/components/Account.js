@@ -13,9 +13,15 @@ import AccountRide from './AccountRide';
 function Account() {
     const { user, setUser } = useAuth();
     const [rideInfo, setRideInfo] = useState([]);
+    const [userInfo, setUserInfo] = useState([]);
 
 
     useEffect(() => {
+      const userIDs = [user]
+        axios.post("http://localhost:5000/auth/get-users-by-ids", { userIDs })
+        .then((result) => setUserInfo(result.data[0]))
+        .catch((err) => console.log(err));
+
         axios.post("http://localhost:5000/auth/getAllRides", { user })
           .then((res) => setRideInfo(res.data)) 
           .catch((err) => console.log(err));
@@ -24,7 +30,7 @@ function Account() {
     return (
         <div className="App">
             <div className="container">
-            <h1>Your Account id: {user}</h1>
+            <h1>{userInfo.firstName} {userInfo.lastName}'s Rides:</h1>
             <div className="list">
               {rideInfo.sort((a, b) => {
                   let d1 = Date.parse(a.date);

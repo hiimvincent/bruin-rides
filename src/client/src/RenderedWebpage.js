@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import { AuthProvider, RequireAuth } from "./Auth";
 import SignUp from "./components/SignUp";
 import Account from "./components/Account";
+import EditAccount from "./components/EditAccount";
 
 
 const RenderedWebpage = () => {
@@ -27,6 +28,7 @@ const RenderedWebpage = () => {
                                 <Route path="/account" element={<Account />} />
                                 <Route path="/add" element={<AddRide />} />
                                 <Route path="/view" element={<ViewRide />} />
+                                <Route path="/edit" element={<EditAccount />} />
                             </Route>
                             
                             <Route

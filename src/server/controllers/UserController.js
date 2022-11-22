@@ -79,3 +79,14 @@ module.exports.getUserByIDs = async (req, res) => {
   }
   res.send(out);
 }
+
+
+module.exports.updateUserByID = async (req, res) => {
+  const _id = req.body.userID;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const email = req.body.email;
+
+  const user = await userModel.findByIdAndUpdate(_id, { firstName, lastName, email });
+  res.set(201).send(user);
+}
