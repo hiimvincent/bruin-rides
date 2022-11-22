@@ -5,6 +5,7 @@ import { useAuth } from "../Auth";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CapacityBar from './CapacityBar';
+import lax from '../lax.png'
 
 export default function Ride({details}) {
     const { user, setUser } = useAuth();
@@ -36,6 +37,7 @@ export default function Ride({details}) {
         <div className="item">
             <div className="address">Region: {details.region}</div>
             <div className="address">Destination: {details.destination}</div>
+            
             <div className="date">Ride Date: {details.date}</div>
             <div className="time">Time: {details.time}</div>
             <div className="grpSize">Riders: {details.riders.length} / {details.grpSize}</div>

@@ -114,7 +114,7 @@ function Search() {
           </div>
         </div>
 
-        <div className="list">
+        <div classname="list">
             {allRides.filter(ride => (dest == null ? true : ride.region == dest.target.value) 
                             && (from == null ? true : ride.meetPlc == from.target.value)
                             && (Date.parse(ride.date) > Date.parse(dateFilter))
@@ -128,7 +128,9 @@ function Search() {
             .map(ride => <Ride
             key={ride._id}
             details={ride}
-            />)}
+            />)
+            }
+            
         </div>
       </div>
     </div>
