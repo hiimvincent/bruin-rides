@@ -74,6 +74,7 @@ function Search() {
       <div className="container">
         <h1>Search Rides</h1>
         <div>
+          <div className='filter'>
             <FormControl fullWidth sx={{m: 1}}>
               <InputLabel id="DestSelect" >Region</InputLabel>
               <Select labelId="DestSelect"  onChange={setDest}>
@@ -110,7 +111,7 @@ function Search() {
                   {timeOpts.map(loc => <MenuItem value={loc.value}>{loc.label}</MenuItem>)}
               </Select>
             </FormControl>
-
+          </div>
         </div>
 
         <div className="list">

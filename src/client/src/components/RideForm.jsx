@@ -117,7 +117,7 @@ const RideForm = () => {
 
   return (
     <div className="rform">
-      <form onSubmit={handleSubmit}>
+      <form2 onSubmit={handleSubmit}>
       <h1>Add Ride</h1>
         <SelectComponent
             options={options}
@@ -138,7 +138,7 @@ const RideForm = () => {
             />
         ))}
         <button>Submit</button>
-      </form>
+      </form2>
     </div>
   );
 };

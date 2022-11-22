@@ -30,9 +30,9 @@ const Login = () => {
   }
 
   return (
-    <div>
-        <h1>Login</h1>
+    <div className="rform">
         <form onSubmit={login}>
+        <h1> Login </h1>
         <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -44,11 +44,13 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password..."
         />
-        <button type="submit">Login</button>
-        </form>
-        <div>Don't have an account?
-            <Button component={Link} to="/signup">Sign Up!</Button>
+        <button type="submit">Sign In</button>
+        <center>
+        <div>
+            <Button component={Link} to="/signup">Create Account</Button>
         </div>
+        </center>
+        </form>
     </div>
   );
 };
