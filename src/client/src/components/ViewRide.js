@@ -61,17 +61,25 @@ function ViewRide() {
     
     const listOfRiderInfo = () =>{
       const listItems = userInfo.map((r) =>
-        <li>{r.email}</li>
+        <h3>{r.firstName} {r.lastName} : {r.email}</h3>
       );
-      return <ul>{listItems}</ul>;
+      return <div>{listItems}</div>;
     }
     return (
         <div className="App">
             <div className="container">
             <h1>Ride ID: {rideID}</h1>
             </div>
-            <div><Button variant="contained" onClick={updateRiders}>Join Ride!</Button></div>          
-              {user && rideInfo && rideInfo.riders && user == rideInfo.riders[0] ? 
+            {
+              user && rideInfo && rideInfo.riders && rideInfo.riders.includes(user) ?
+              <div><Button variant="contained" onClick={console.log("notDone")}>Leave Ride</Button></div>          
+              :
+              <div><Button variant="contained" onClick={updateRiders}>Join Ride!</Button></div>          
+            
+            }
+            {/*
+              //edit ride function, deleted
+              user && rideInfo && rideInfo.riders && user == rideInfo.riders[0] ? 
               
               <div>
                 <br/><br/> 
@@ -82,7 +90,9 @@ function ViewRide() {
               value={desc}
               onChange={(e) => setDesc(e.target.value)} />
               <div><Button variant="contained" onClick={updateRideDesc}>Update Ride Desc!</Button></div></div> 
-            : <div/>}
+            : <div/>
+            */
+            }
             <br/><br/>
 
             <h2 className="riders">Riders: {rideInfo.riders ? rideInfo.riders.length : "0"}/{rideInfo.grpSize}</h2> 
