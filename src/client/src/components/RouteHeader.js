@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import logo from '../blue.png';
+
 import '../App.css';
 import { Button } from '@mui/material';
 import { useAuth } from "../Auth";
@@ -59,6 +61,11 @@ function RouteHeader() {
                     <li>
                         <Link to="/search">Search</Link>
                     </li>
+
+                    <logo>
+                        <img src={logo} alt="Logo" width="70" />
+                        <h2> Bruin Rides </h2>
+                    </logo>
                 </ul>
                 
                 <Outlet />

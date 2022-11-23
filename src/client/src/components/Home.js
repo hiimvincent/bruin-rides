@@ -28,7 +28,6 @@ function Home() {
   return (
 <div className="App">
 <div className="container"> 
-  <h2> <img src={logo} alt="Logo" width="90" /> Bruin Rides </h2>
 </div>
 <div className="homepageText">
   <p>

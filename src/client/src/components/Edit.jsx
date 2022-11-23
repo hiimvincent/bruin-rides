@@ -112,7 +112,7 @@ const Edit = () => {
   return (
     <div className="app">
       <form onSubmit={signUp}>
-        <h1> Edit Account: </h1>
+        <h1> Edit Account </h1>
         {inputs.map((input) => (
             <AddFixedInput
                 key={input.id}

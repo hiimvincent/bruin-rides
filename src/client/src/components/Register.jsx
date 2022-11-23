@@ -89,7 +89,7 @@ const Register = () => {
   };
 
   return (
-    <div className="app">
+    <div className="rform">
       <form onSubmit={signUp}>
         <h1>Create Account</h1>
         {inputs.map((input) => (
