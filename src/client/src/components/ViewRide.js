@@ -75,9 +75,12 @@ function ViewRide() {
   
   const listOfRiderInfo = () =>{
     const listItems = userInfo.map((r) =>
-      <h3>{r.firstName} {r.lastName} : {r.email}</h3>
+    r.firstName  || r.lastName ?
+      <li class="liRiderList">{r.firstName} {r.lastName} : {r.email}</li>
+    :
+      <li class="liRiderList">{r.email}</li>
     );
-    return <div>{listItems}</div>;
+    return <ul class="ulRiderList">{listItems}</ul>;
   }
 
   return (
@@ -91,7 +94,8 @@ function ViewRide() {
         </Button>
         <br/><br/>
 
-        <h2 className="riders">Riders: {rideInfo.riders ? rideInfo.riders.length : "0"}/{rideInfo.grpSize}</h2> 
+        <h2 className="riders">Riders: {rideInfo.riders ? rideInfo.riders.length : "0"}/{rideInfo.grpSize}</h2>
+        <br/> 
         {
           user && rideInfo && rideInfo.riders && rideInfo.riders.includes(user) ?
           

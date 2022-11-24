@@ -25,7 +25,7 @@ function RouteHeader() {
     return (
         <div className="App">
             <div className="container">
-                <ul>
+                <ul class="ulHeader">
                     {user ? 
                     <li>
                         <Link to="/search" onClick={logout}>Log Out</Link> 

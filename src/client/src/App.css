@@ -135,7 +135,7 @@ i {
   cursor: pointer;
 }
 
-ul{
+.ulHeader{
   list-style-type: none;
   margin: 0;
   padding: 0;
