@@ -2,10 +2,18 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import logo from '../blue.png';
+import bear from '../BruinBear.jpg';
 
 
 import '../App.css';
 import RideShareComponent from './RideShareComponent'
+
+const imageStyle = {
+  height: 400,
+  width: 400,
+  borderRadius: "25px",
+  padding: "10px"
+}
 
 function Home() {
 
@@ -29,41 +37,49 @@ function Home() {
 <div className="App">
 <div className="container"> 
 </div>
-<div className="homepageText">
-  <p>
-  <b>Bruin Rides</b> is a website where students from UCLA can coordinate sharing an Uber or Lyft ride.
-  </p>
-  <br></br>
-  <p>
-  Whether it's sightseers looking for fun in downtown LA, beach-goers headed to Santa Monica,
-  or even Bruins hoping to get a better rate on their trip to LAX, 
-  Bruin Rides is the central location for students to coordinate splitting fares.
-  </p>
-  <br></br>
-  <hr></hr>
-  <br></br>
-  <p>
-  <b>To get started</b> <Link to="/login">log in or sign up</Link> and search for your ride by: destination, date, and time. 
-  </p>
-  <br></br>
-  <p>If you can't find a ride you want, take the initiative and make your own ride for others to join in on. 
-  </p>
-  <br></br>
-  <br></br>
-  <br></br>
-  {/* <h3>Some Rides On Our Page Now</h3>
-</div>
-<div className="list" font-size="20px">
-          {rides.map(ride => <RideShareComponent
-            key={ride._id}
-            remove={() => deleteRide(ride._id)}
-            region={ride.region}
-            destination={ride.destination}
-            date={ride.date}
-            time={ride.time}
-            desc={ride.desc}
-          />)} */}
-</div>
+<center>
+  <div className="row">
+    <div className="homepageText largeCol">
+      <p>
+      <b>Bruin Rides</b> offers UCLA students a place to coordinate sharing an Uber or Lyft ride.
+      </p>
+      <br></br>
+      <p>
+      Whether it's sightseers looking for fun in downtown LA, beach-goers headed to Santa Monica,
+      or even Bruins hoping to get a better rate on their trip to LAX, 
+      Bruin Rides is the central location for students to coordinate splitting fares.
+      </p>
+      <br></br>
+      <p>Find rides created by fellow Bruins or make your own and look for others to join. </p> 
+      <br></br>
+      <hr></hr>
+      <br></br>
+      <p>
+      <b>To get started</b> log in or sign up and search for rides by destination, date, or time. 
+      </p>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+
+      {/* <h3>Some Rides On Our Page Now</h3>
+    </div>
+    <div className="list" font-size="20px">
+              {rides.map(ride => <RideShareComponent
+                key={ride._id}
+                remove={() => deleteRide(ride._id)}
+                region={ride.region}
+                destination={ride.destination}
+                date={ride.date}
+                time={ride.time}
+                desc={ride.desc}
+              />)} */}
+    </div>
+    <div className="smallCol">
+      <img src ={bear} style={imageStyle}/>
+    </div>
+  </div>
+</center>
 
 </div>
   );

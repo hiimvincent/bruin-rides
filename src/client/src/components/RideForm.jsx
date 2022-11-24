@@ -15,7 +15,7 @@ const RideForm = () => {
     date: "",
     time: "",
     desc: "",
-    grpSize: 0
+    grpSize: 2
   });
   const destination = values.destination
   const date = values.date
@@ -40,7 +40,7 @@ const RideForm = () => {
             date: "",
             time: "",
             desc: "",
-            grpSize: 0
+            grpSize: 2
           });
           setRegion("")
           navigate("/search");
@@ -116,7 +116,7 @@ const RideForm = () => {
   };
 
   return (
-    <div className="rform">
+    <div>
       <form onSubmit={handleSubmit}>
       <h1>Add Ride</h1>
         <SelectComponent
