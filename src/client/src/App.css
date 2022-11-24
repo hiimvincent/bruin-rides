@@ -2,6 +2,23 @@
   margin: 0;
 }
 
+.row {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.largeCol {
+  flex: 2;
+  padding-left: 5vh;
+  padding-top: 10vh;
+}
+
+.smallCol{
+  flex:1;
+}
+
 .container {
   max-width: 100vw;
   padding: 0 1rem;
