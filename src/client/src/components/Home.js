@@ -41,16 +41,16 @@ function Home() {
   <div className="row">
     <div className="homepageText largeCol">
       <p>
-      <b>Bruin Rides</b> offers UCLA students a place to coordinate sharing an Uber or Lyft ride.
+      <b>Bruin Rides</b> offers UCLA students a platform to coordinate carpooling.
       </p>
       <br></br>
       <p>
       Whether it's sightseers looking for fun in downtown LA, beach-goers headed to Santa Monica,
       or even Bruins hoping to get a better rate on their trip to LAX, 
-      Bruin Rides is the central location for students to coordinate splitting fares.
+      Bruin Rides is the central location for all UCLA students looking to split transportation costs.
       </p>
       <br></br>
-      <p>Find rides created by fellow Bruins or make your own and look for others to join. </p> 
+      <p>Find rides created by fellow Bruins or create your own ride for others to join. </p> 
       <br></br>
       <hr></hr>
       <br></br>
