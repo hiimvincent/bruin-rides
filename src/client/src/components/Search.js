@@ -9,6 +9,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker, TimePicker } from '@mui/x-date-pickers';
 import { Dayjs } from 'dayjs';
+import SelectComponent from "./SelectComponent";
 
 const destLocs = [
   { key: "LAX", value: "LAX" },
@@ -52,6 +53,12 @@ const timeOpts = [
   { value: 23, label: "11:00 PM"}
 ]
 
+const curr = new Date();
+const utcDate = new Date(curr.toUTCString());
+utcDate.setHours(utcDate.getHours()-8);
+const pstcur = new Date(utcDate);
+const date = pstcur.toISOString().substring(0,10);
+
 function Search() {
 
   const [text, setText] = useState("");
@@ -69,57 +76,48 @@ function Search() {
       .catch((err) => console.log(err));
   })
 
+
   return (
     <div className="App">
       <div className="container">
         <h1>Search Rides</h1>
         <div>
           <div className='filter'>
-            <FormControl fullWidth sx={{m: 1}}>
-              <InputLabel id="DestSelect" >Region</InputLabel>
-              <Select labelId="DestSelect"  onChange={setDest}>
-                  {destLocs.map(loc => <MenuItem value={loc.value}>{loc.value}</MenuItem>)}
-              </Select>
-            </FormControl>
-            { /*<FormControl fullWidth>
-              <InputLabel id="MeetSelect">Meeting</InputLabel>
-              <Select labelId="DestSelect" onChange={setFrom}>
-                  {fromLocs.map(loc => <MenuItem value={loc.value}>{loc.label}</MenuItem>)}
-              </Select>
-            </FormControl> */}
-            <FormControl fullWidth sx={{m: 1}}>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
-                      label="Date"
-                      value={dateFilter}
-                      onChange={(newValue) => {
-                      setDateFilter(newValue);
-                      }}
-                      renderInput={(params) => <TextField {...params} />}
-                  />
-              </LocalizationProvider>
-            </FormControl>
-            <FormControl fullWidth sx={{m: 1}}>
-              <InputLabel id="ToSelect">From Time</InputLabel>
-              <Select labelId="ToSelect"  options={fromLocs} onChange={setToTimeFilter}>
-                  {timeOpts.map(loc => <MenuItem value={loc.value}>{loc.label}</MenuItem>)}
-              </Select>
-            </FormControl>
-            <FormControl fullWidth sx={{m: 1}}>
-              <InputLabel id="FromSelect">To Time</InputLabel>
-              <Select labelId="FromSelect" options={fromLocs} onChange={setFromTimeFilter}>
-                  {timeOpts.map(loc => <MenuItem value={loc.value}>{loc.label}</MenuItem>)}
-              </Select>
-            </FormControl>
+            <div class="filterField">
+              <label>Destination</label>
+                <div className="selectWrapper">
+                <select className="selectBox" onChange={setDest}>
+                  <option value="" disabled>Destination</option>
+                  {destLocs.map(loc => <option value={loc.value}>{loc.value}</option>)}
+                </select>
+                </div>
+              </div>
+            <div class="filterField">
+              <label>Date</label>
+              <input name="date" type="date" label="Date" defaultValue={date} onChange={(ev) => 
+                { 
+                  const date = new Date(ev.target.valueAsDate);
+
+                  setDateFilter(date.toUTCString())}
+                }></input>
+            </div>
+            <div class="filterField">
+              <label>From Time</label>
+            <input name="fromTime" type="time" label="FromTime" onChange={(ev) => {setFromTimeFilter(ev.target.valueAsDate)}}></input>
+           </div>
+            <div class="filterField">
+              <label>To Time</label>
+              <input name="toTime" type="time" label="toTime" onChange={(ev) => {setToTimeFilter(ev.target.valueAsDate)}}></input>
+            </div>
           </div>
         </div>
 
         <div classname="list">
             {allRides.filter(ride => (dest == null ? true : ride.region == dest.target.value) 
                             && (from == null ? true : ride.meetPlc == from.target.value)
-                            && (Date.parse(ride.date) > Date.parse(dateFilter))
-                            && (toTimeFilter == null ? true : ((toTimeFilter.target.value) <= parseInt(ride.time.substring(0, ride.time.indexOf(":")))))
-                            && (fromTimeFilter == null ? true : ((fromTimeFilter.target.value) >= parseInt(ride.time.substring(0, ride.time.indexOf(":"))))))
+                            && (Date.parse(ride.date) >= Date.parse(dateFilter))
+                            && (toTimeFilter == null ? true : (parseInt(toTimeFilter.getHours() + 8) % 24 >= parseInt(ride.time.substring(0, ride.time.indexOf(":")))))
+                            && (fromTimeFilter == null ? true : (parseInt(fromTimeFilter.getHours() + 8) % 24 <= parseInt(ride.time.substring(0, ride.time.indexOf(":"))))))
             .sort((a, b) => {
               let d1 = Date.parse(a.date);
               let d2 = Date.parse(b.date);
