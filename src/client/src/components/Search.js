@@ -48,10 +48,12 @@ function Search() {
           let d2 = Date.parse(b.date);
           return d1 - d2;
           })
-          .map(ride => <Ride
-          key={ride._id}
-          details={ride}
-          />))
+          .map(ride => <div key={ride._id}>
+            <Ride 
+              details={ride}
+              onDelete={fetchData}
+            />
+            </div>))
   
     })
     .catch((err) => console.log(err));

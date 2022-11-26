@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import CapacityBar from './CapacityBar';
 import lax from '../lax.png'
 
-export default function Ride({details}) {
+export default function Ride({details, onDelete}) {
     const { user, setUser } = useAuth();
     const navigate = useNavigate();
     const capacity = [{completed: (details.riders.length/details.grpSize)*100}];
@@ -35,9 +35,17 @@ export default function Ride({details}) {
             riders = riders.filter(function(value, index, arr){ 
                 return value != user;
             });
-            axios.post("http://localhost:5000/update-riders-by-id", { rideID, riders })
-            .then((res) => console.log(res.data)) 
-            .catch((err) => console.log(err));
+            if (riders.length > 0) {
+                axios.post("http://localhost:5000/update-riders-by-id", { rideID, riders })
+                .then((res) => console.log(res.data)) 
+                .catch((err) => console.log(err));
+            } else {
+                axios.post("http://localhost:5000/delete-ride", { rideID })
+                .then((res) => console.log(res.data)) 
+                .catch((err) => console.log(err));
+                onDelete();
+                console.log("Called on delete")
+            }
 
             axios.post("http://localhost:5000/auth/remove-user-rides-by-id", { user, rideID })
             .then((res) => console.log(res.data)) 

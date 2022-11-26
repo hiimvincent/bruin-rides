@@ -48,6 +48,16 @@ module.exports.updateRides = async (req, res) => {
   res.send(userUpdated);
 }
 
+module.exports.deleteRides = async (req, res) => {
+  const body = req.body;
+  const user = await userModel.findById(body.user);
+  const rides = user.rides.filter(function(value, index, arr) { 
+      return value != body.rideID;
+  });
+  const userUpdated = await userModel.findByIdAndUpdate(body.user, { rides });
+  res.send(userUpdated);
+}
+
 module.exports.getUserRides = async (req, res) => {
   const userID = req.body.user;
 

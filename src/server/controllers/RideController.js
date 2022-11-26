@@ -40,13 +40,10 @@ module.exports.saveRide = async (req, res) => {
     res.send(newRide)
 }
 
-module.exports.deleteRide = (req, res) => {
-    const { _id } = req.body;
-
-    RideModel
-        .findByIdAndDelete(_id)
-        .then(() => res.set(201).send("Deleted Successfully..."))
-        .catch((err) => console.log(err));
+module.exports.deleteRide = async (req, res) => {
+    const _id = req.body.rideID;
+    const ride = await RideModel.findByIdAndDelete(_id);
+    res.send(ride);
 }
 
 module.exports.updateRide = (req, res) => {
