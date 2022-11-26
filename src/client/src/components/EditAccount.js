@@ -33,7 +33,7 @@ function EditAccount() {
             setEmail(result.data[0].email)
           })
           .catch((err) => console.log(err));
-        })
+        }, [user])
 
     const updateAccount = (e) => {
         e.preventDefault();

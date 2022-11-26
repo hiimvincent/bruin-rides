@@ -17,22 +17,6 @@ const imageStyle = {
 
 function Home() {
 
-  const [text, setText] = useState("");
-  const [rides, setRides] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:5000/get-all-rides")
-      .then((res) => setRides(res.data))
-      .catch((err) => console.log(err));
-  })
-
-
-  const deleteRide = (_id) => {
-    axios.post("http://localhost:5000/delete-ride", { _id })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
-  }
-
   return (
 <div className="App">
 <div className="container"> 

@@ -36,7 +36,7 @@ function ViewRide() {
         .catch((err) => console.log(err));
       }) 
       .catch((err) => console.log(err));
-  })
+  }, [rideID])
 
   const updateRideDesc = () => {
       axios.post("http://localhost:5000/update-desc-by-id", { rideID, desc })

@@ -1,38 +1,33 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Link,
-  useLocation
-} from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from "axios";
-import { Button } from '@mui/material';
 import { useAuth } from "../Auth";
 import AccountRide from './AccountRide';
+import { ProgressBar } from  'react-loader-spinner'
+
 
 function Account() {
     const { user, setUser } = useAuth();
-    const [rideInfo, setRideInfo] = useState([]);
-    const [userInfo, setUserInfo] = useState([]);
+    const [toRender, setRender] = useState("");
 
 
     useEffect(() => {
-      const userIDs = [user]
-        axios.post("http://localhost:5000/auth/get-users-by-ids", { userIDs })
-        .then((result) => setUserInfo(result.data[0]))
-        .catch((err) => console.log(err));
+        fetchData();
+    }, [user])
 
-        axios.post("http://localhost:5000/auth/getAllRides", { user })
-          .then((res) => setRideInfo(res.data)) 
-          .catch((err) => console.log(err));
-      })
-    
-    return (
-        <div className="App">
-            <div className="container">
-            <h1>{userInfo.firstName} {userInfo.lastName}'s Rides:</h1>
+    const fetchData = () => {
+      const userIDs = [user]
+      console.log("test") 
+        axios.post("http://localhost:5000/auth/get-users-by-ids", { userIDs })
+        .then((result) => {
+          
+          axios.post("http://localhost:5000/auth/getAllRides", { user })
+          .then((res) => {
+            setRender(
+              <div>
+            <h1>{result.data[0].firstName} {result.data[0].lastName}'s Rides:</h1>
             <div className="list">
-              {rideInfo.sort((a, b) => {
+              {res.data.sort((a, b) => {
                   let d1 = Date.parse(a.date);
                   let d2 = Date.parse(b.date);
                   return d1 - d2;
@@ -42,6 +37,33 @@ function Account() {
                   details={ride}
               />)}
             </div>
+            </div>
+            )
+          }) 
+          .catch((err) => console.log(err));
+        }
+        )
+        .catch((err) => console.log(err));
+    }
+    
+    return (
+        <div className="App">
+            <div className="container">
+            { 
+            toRender ? 
+            toRender : 
+              <center>
+                <ProgressBar
+                    height="80"
+                    width="160"
+                    ariaLabel="progress-bar-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="progress-bar-wrapper"
+                    borderColor = '#eed445'
+                    barColor = '#2773ad'
+                  />
+              </center>
+            }
             </div>
         </div>
         );
