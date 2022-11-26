@@ -76,11 +76,11 @@ function ViewRide() {
   const listOfRiderInfo = () =>{
     const listItems = userInfo.map((r) =>
     r.firstName  || r.lastName ?
-      <li class="liRiderList">{r.firstName} {r.lastName} : {r.email}</li>
+      <h3 className="h3RiderInfo">{r.firstName} {r.lastName} : {r.email}</h3>
     :
-      <li class="liRiderList">{r.email}</li>
+      <h3 className="h3RiderInfo">{r.email}</h3>
     );
-    return <ul class="ulRiderList">{listItems}</ul>;
+    return <div>{listItems}</div>;
   }
 
   return (
@@ -104,7 +104,7 @@ function ViewRide() {
           </div> 
         :   
         <div>
-          <h3>Join ride to see other riders </h3>
+          <h3 className="h3RiderInfo">Join ride to see other riders </h3>
         </div>
         }
         <br/>
