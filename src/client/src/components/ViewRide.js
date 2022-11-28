@@ -8,7 +8,21 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 import { Button } from '@mui/material';
 import { useAuth } from "../Auth";
+import Burbank from "./background_photos/Burbank.jpg";
+import Hollywood from "./background_photos/Hollywood.jpg";
+import Koreatown from "./background_photos/Koreatown.jpg";
+import LADowntown from "./background_photos/LADowntown.jpg";
+import LAX from "./background_photos/LAX.jpg";
+import SantaMonica from "./background_photos/SantaMonica.jpg";
 
+
+
+const imageStyle = {
+  height: 400,
+  width: 400,
+  borderRadius: "25px",
+  padding: "10px"
+}
 
 function useQuery() {
     const { search } = useLocation();
@@ -83,6 +97,25 @@ function ViewRide() {
     return <div>{listItems}</div>;
   }
 
+  const getBackgroundImage = () =>{
+    const locations = ["LAX", "Downtown", "Hollywood", "Koreatown", "Santa Monica", "Burbank"];
+    switch (rideInfo.region){
+      case locations[0]:
+        return LAX;
+      case locations[1]:
+          return LADowntown;
+      case locations[2]:
+            return Hollywood;
+      case locations[3]:
+        return Koreatown;
+      case locations[4]:
+        return SantaMonica;
+      case locations[5]:
+        return Burbank;
+    }
+
+  }
+
   return (
     <div className="App">
         <div className="container">
@@ -93,8 +126,10 @@ function ViewRide() {
           {(user && rideInfo && rideInfo.riders && rideInfo.riders.includes(user)) ? "Leave Ride" : "Join Ride"}
         </Button>
         <br/><br/>
-
-        <h2 className="riders">Riders: {rideInfo.riders ? rideInfo.riders.length : "0"}/{rideInfo.grpSize}</h2>
+  <center>
+  <div className="row">
+    <div className="column">
+    <h2 className="riders">Riders: {rideInfo.riders ? rideInfo.riders.length : "0"}/{rideInfo.grpSize}</h2>
         <br/> 
         {
           user && rideInfo && rideInfo.riders && rideInfo.riders.includes(user) ?
@@ -116,8 +151,18 @@ function ViewRide() {
         <h2 className="address">Destination: {rideInfo.destination}</h2>
         <br/>
         <h2 className="desc">Description: {rideInfo.desc}</h2>
+            </div>
+    <div className="column">
+      <img src ={getBackgroundImage()} style={imageStyle}/>
+    </div>
+  </div>
+</center>
+
+
+
     </div>
   );
+
 }
     
 export default ViewRide;
