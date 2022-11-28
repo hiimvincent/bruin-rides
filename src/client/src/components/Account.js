@@ -24,9 +24,8 @@ function Account() {
           axios.post("http://localhost:5000/auth/getAllRides", { user })
           .then((res) => {
             setRender(
-              <div>
+            <div>
             <h1>{result.data[0].firstName} {result.data[0].lastName}'s Rides:</h1>
-            <div className="list">
               {res.data.sort((a, b) => {
                   let d1 = Date.parse(a.date);
                   let d2 = Date.parse(b.date);
@@ -36,7 +35,6 @@ function Account() {
                   key={ride._id}
                   details={ride}
               />)}
-            </div>
             </div>
             )
           }) 
