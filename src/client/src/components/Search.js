@@ -5,6 +5,15 @@ import '../App.css';
 import RideComponent from './RideComponent'
 import Ride from './Ride';
 import { ProgressBar } from  'react-loader-spinner'
+import laxPic from "../components/background_photos/LAX.jpg"
+import downtownPic from "../components/background_photos/LADowntown.jpg"
+import hollywoodPic from "../components/background_photos/Hollywood.jpg"
+import koreatownPic from "../components/background_photos/Koreatown.jpg"
+import santamonicaPic from "../components/background_photos/SantaMonica.jpg"
+import burbankPic from "../components/background_photos/Burbank.jpg"
+
+
+
 
 
 const destLocs = [
@@ -48,7 +57,7 @@ function Search() {
           let d2 = Date.parse(b.date);
           return d1 - d2;
           })
-          .map(ride => <div key={ride._id}>
+          .map(ride => <div className="ride"key={ride._id}>
             <Ride 
               details={ride}
               onDelete={fetchData}

@@ -27,38 +27,38 @@ function RouteHeader() {
             <ul class="ulHeader">
                 {user ? 
                 <li className='routeHeader'>
-                    <Link to="/search" onClick={logout}>Log Out</Link> 
+                    <Link to="/search" onClick={logout}><b>Log Out</b></Link> 
                 </li>
                 : <div/>}
 
                 {user ? 
                 <div>
                 <li className='routeHeader'>
-                    <Link to="/edit"><FiSettings/></Link>
+                    <Link to="/edit"><FiSettings size="20"/></Link>
                 </li>
                 <li className='routeHeader'>
-                    <Link to="/account"> <BsPersonCircle/> </Link>
+                    <Link to="/account"> <BsPersonCircle size="20"/> </Link>
                 </li> 
                 </div>
                 :
                 <li className='routeHeader'>
-                    <Link to="/login">Login</Link>
+                    <Link to="/login"><b>Login</b></Link>
                 </li>
                 }
 
                 <li className='routeHeader'>
-                    <Link to="/about">About</Link>
+                    <Link to="/about"><b>About</b></Link>
                 </li>
 
                 {user ? 
                 <li className='routeHeader'>
-                    <Link to="/add">Add Ride</Link>
+                    <Link to="/add"><b>Add Ride</b></Link>
                 </li>
                 : <div/>}
                 
 
                 <li className='routeHeader'>
-                    <Link to="/search">Search</Link>
+                    <Link to="/search"><b>Search</b></Link>
                 </li>
 
                 <logo>
