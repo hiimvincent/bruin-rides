@@ -13,7 +13,7 @@ export default function Ride({details, onDelete}) {
     const capacity = [{completed: (details.riders.length/details.grpSize)*100}];
 
     const hasJoined = user && details.riders.includes(user);
-    const joinOrLeave = hasJoined ? "Leave Ride" : "Join Ride";
+    const joinOrLeave = hasJoined ? "Leave Ride" : (details.riders.length < details.grpSize ? "Join Ride": "Ride Full");
 
     function formatAMPM(date) {
         var hours = date.substring(0, 2)

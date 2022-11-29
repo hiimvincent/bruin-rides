@@ -1,13 +1,14 @@
 import React from "react";
+import { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Link,
   useLocation
 } from "react-router-dom";
-import { useState, useEffect } from 'react';
 import axios from "axios";
 import { Button } from '@mui/material';
 import { useAuth } from "../Auth";
+
 import Burbank from "./background_photos/Burbank.jpg";
 import Hollywood from "./background_photos/Hollywood.jpg";
 import Koreatown from "./background_photos/Koreatown.jpg";
@@ -16,12 +17,24 @@ import LAX from "./background_photos/LAX.jpg";
 import SantaMonica from "./background_photos/SantaMonica.jpg";
 
 
-
 const imageStyle = {
   height: 400,
   width: 400,
   borderRadius: "25px",
-  padding: "10px"
+  padding: "10px",
+  marginRight: "50px",
+}
+
+const buttonStyle = {
+  width: 600,
+  maxWidth: "100%",
+  margin: "10px",
+  marginTop: "60px",
+}
+
+const cenStyle = {
+  maxWidth: "85%",
+  paddingTop: "40px",
 }
 
 function useQuery() {
@@ -118,48 +131,39 @@ function ViewRide() {
 
   return (
     <div className="App">
-        <div className="container">
-          <h1>Ride ID: {rideID}</h1>
+      <center style={cenStyle}>
+        <div className="row">
+          <div className="column">
+            <img src ={getBackgroundImage()} style={imageStyle}/>
+          </div>
+          <div className="column">
+            <h2 className="riders">Riders: {rideInfo.riders ? rideInfo.riders.length : "0"}/{rideInfo.grpSize}</h2>
+            <br/> 
+            {
+              user && rideInfo && rideInfo.riders && rideInfo.riders.includes(user) ?
+              
+              <div>
+                {listOfRiderInfo()}
+              </div> 
+            :   
+            <div>
+              <h3 className="h3RiderInfo">Join ride to see other riders </h3>
+            </div>
+            }
+            <br/>
+            <h2 className="address">Ride Date: {rideInfo.date}</h2>
+            <h2 className="address">Time: {rideInfo.time}</h2>
+            <h2 className="address">Region: {rideInfo.region}</h2>
+            <h2 className="address">Destination: {rideInfo.destination}</h2>
+            <h2 className="address">Description: {rideInfo.desc}</h2>
+          </div>
         </div>
-
-        <Button variant="contained" onClick={updateRiders}>
-          {(user && rideInfo && rideInfo.riders && rideInfo.riders.includes(user)) ? "Leave Ride" : "Join Ride"}
+        <Button variant="contained" onClick={updateRiders} style={buttonStyle}>
+        {(user && rideInfo && rideInfo.riders && rideInfo.riders.includes(user)) ? "Leave Ride" : 
+          (rideInfo && rideInfo.riders && rideInfo.riders.length < rideInfo.grpSize ? "Join Ride" : "Ride Full")}
         </Button>
         <br/><br/>
-  <center>
-  <div className="row">
-    <div className="column">
-    <h2 className="riders">Riders: {rideInfo.riders ? rideInfo.riders.length : "0"}/{rideInfo.grpSize}</h2>
-        <br/> 
-        {
-          user && rideInfo && rideInfo.riders && rideInfo.riders.includes(user) ?
-          
-          <div>
-            {listOfRiderInfo()}
-          </div> 
-        :   
-        <div>
-          <h3 className="h3RiderInfo">Join ride to see other riders </h3>
-        </div>
-        }
-        <br/>
-        <h2 className="date">Ride Date: {rideInfo.date}</h2>
-        <h2 className="time">Time: {rideInfo.time}</h2>
-        <br/>
-        <h2 className="address">Region: {rideInfo.region}</h2>
-        <h2 className="address">{rideInfo.address}</h2>
-        <h2 className="address">Destination: {rideInfo.destination}</h2>
-        <br/>
-        <h2 className="desc">Description: {rideInfo.desc}</h2>
-            </div>
-    <div className="column">
-      <img src ={getBackgroundImage()} style={imageStyle}/>
-    </div>
-  </div>
-</center>
-
-
-
+      </center>
     </div>
   );
 
