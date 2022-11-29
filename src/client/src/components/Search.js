@@ -5,16 +5,7 @@ import '../App.css';
 import RideComponent from './RideComponent'
 import Ride from './Ride';
 import { ProgressBar } from  'react-loader-spinner'
-import laxPic from "../components/background_photos/LAX.jpg"
-import downtownPic from "../components/background_photos/LADowntown.jpg"
-import hollywoodPic from "../components/background_photos/Hollywood.jpg"
-import koreatownPic from "../components/background_photos/Koreatown.jpg"
-import santamonicaPic from "../components/background_photos/SantaMonica.jpg"
-import burbankPic from "../components/background_photos/Burbank.jpg"
-
-
-
-
+import { Button } from '@mui/material';
 
 const destLocs = [
   { key: "LAX", value: "LAX" },
@@ -68,7 +59,6 @@ function Search() {
     .catch((err) => console.log(err));
   }
 
-
   return (
     <div className="App">
       <div className="container">
@@ -78,17 +68,25 @@ function Search() {
             <div>
               <div className='filter'>
                 <div class="filterField">
-                  <label>Destination</label>
+                  <label className="filterLabel">Destination</label>
+                  {
+                  dest ?
+                  <Button className="clearButton" variant="contained" color="primary" sx={{m: 1}}  onClick={() => {setDest(null);  const $select = document.querySelector('#destSelect');  $select.value = 'default'}}>Clear</Button>
+                  : null}
                     <div className="selectWrapper">
-                    <select className="selectBox" onChange={setDest}>
-                      <option value="" disabled>Destination</option>
+                    <select className="selectBox" onChange={setDest} id="destSelect">
+                      <option value="default" disabled selected>Destination</option>
                       {destLocs.map(loc => <option value={loc.value}>{loc.value}</option>)}
                     </select>
                     </div>
                   </div>
                 <div class="filterField">
-                  <label>Date</label>
-                  <input name="date" type="date" label="Date" defaultValue={date} onChange={(ev) => 
+                  <label className="filterLabel">Date</label>
+                  {
+                  dateFilter != new Date().toDateString() ?
+                  <Button className="clearButton" variant="contained" color="primary" sx={{m: 1}} hidden="true" onClick={() => {setDateFilter(new Date().toDateString() );  const $select = document.querySelector('#dateFilter');  $select.value = date}}>Clear</Button>
+                  : null}
+                  <input name="date" type="date" label="Date" id="dateFilter" defaultValue={date} onChange={(ev) => 
                     { 
                       const date = new Date(ev.target.valueAsDate);
 
@@ -96,12 +94,20 @@ function Search() {
                     }></input>
                 </div>
                 <div class="filterField">
-                  <label>From Time</label>
-                <input name="fromTime" type="time" label="FromTime" onChange={(ev) => {setFromTimeFilter(ev.target.valueAsDate)}}></input>
+                  <label className="filterLabel">From Time</label>
+                  {
+                  fromTimeFilter ?
+                  <Button className="clearButton" variant="contained" color="primary" sx={{m: 1}} hidden="true" onClick={() => {setFromTimeFilter(null);  const $select = document.querySelector('#fromFilter');  $select.value = ""}}>Clear</Button>
+                  : null}
+                <input name="fromTime" type="time" label="FromTime" id="fromFilter" onChange={(ev) => {setFromTimeFilter(ev.target.valueAsDate)}}></input>
               </div>
                 <div class="filterField">
-                  <label>To Time</label>
-                  <input name="toTime" type="time" label="toTime" onChange={(ev) => {setToTimeFilter(ev.target.valueAsDate)}}></input>
+                  <label className="filterLabel">To Time</label>
+                  {
+                  toTimeFilter ?
+                  <Button className="clearButton" variant="contained" color="primary" sx={{m: 1}} hidden="true" onClick={() => {setToTimeFilter(null);  const $select = document.querySelector('#toFilter');  $select.value = ""}}>Clear</Button>
+                  : null}
+                  <input name="toTime" type="time" label="toTime" id="toFilter" onChange={(ev) => {setToTimeFilter(ev.target.valueAsDate)}}></input>
                 </div>
               </div>
             </div>

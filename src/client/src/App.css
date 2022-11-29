@@ -3,7 +3,7 @@
 }
 
 .filterField {
-  width: 250px;
+  width: 300px;
   padding-right: 7vh;
 }
 
@@ -80,13 +80,13 @@
 .rides{
   justify-content: center;
   display: grid;
-  grid-template-columns: 50% 35%;
+  grid-template-columns: 50% 50%;
 }
 
 .ridePhoto{
   display: block;
   height: auto;
-  width: 220px;
+  max-width: 220px;
   padding-right: 100px;
   margin-left: -300px;
   z-index: -99;
@@ -106,9 +106,6 @@ h1 {
 
 
 }
-
-
-
 
 h2 {
   /* margin-top: -1.1rem;
@@ -131,7 +128,20 @@ h2 {
 }
 .category{
   display: inline-block; 
-  width: 120px;
+  width: 7.8vw;
+}
+
+.destination{
+  display: inline-block; 
+  width: 9.4vw;
+}
+
+.clearButton{
+  width: 1vw;
+  height: 1.5vw;
+  margin-bottom: 0px;
+  padding: 0px;
+  vertical-align: middle;
 }
 
 	
@@ -205,8 +215,8 @@ input {
   font-size: 1.1em;
   color: white;
   line-height: 1.4em;
-  width: 300px;
-  margin-left: auto;
+  max-width: 300px;
+  margin-left: 18vw;
   margin-right: auto;
   display: flex;
   flex-direction: row;
@@ -225,11 +235,17 @@ input {
   border-radius: 5px;
   font-size: 1.1em;
   line-height: 1.4em;
-  width: 800px;
+  width: 900px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   flex-direction: row;
+}
+
+.filterLabel{
+  display: inline-block;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .icons {

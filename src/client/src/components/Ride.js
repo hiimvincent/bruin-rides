@@ -96,7 +96,7 @@ export default function Ride({details, onDelete}) {
             />
             <div className='rideDetails'>
                 <div className="address"><div className='category'><b>Region</b></div>{details.region}</div>
-                <div className="address"><div className='category'><b>Destination</b></div> {details.destination}</div>
+                <div className="address"><div className='category'><b>Destination</b></div><div className='destination'> {details.destination}</div></div>
                 
                 <div className="date"><div className='category'><b>Date</b></div> {details.date}</div>
                 <div className="time"><div className='category'><b>Time</b></div> {formatAMPM(details.time)}</div>
@@ -113,7 +113,6 @@ export default function Ride({details, onDelete}) {
 
                 }
                 <Button component={Link} to={"/view?rideid=" + details._id} variant="contained" color="primary" sx={{m: 1}} >More Details</Button>
-
             </div>
             
 
