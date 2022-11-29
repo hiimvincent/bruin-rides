@@ -178,13 +178,13 @@ input {
   width: 100%;
   padding: 0.5rem;
   padding-left: 1.4rem;
-  border-bottom: 1px solid #2774AE;
+  border-bottom: 1px solid #08497A;
   font-family: "Raleway";
   font-size: 1em;
 }
 
 .add {
-  background-color: #2774AE;
+  background-color: #08497A;
   color: #fff;
   padding: 0.8rem 1.6rem;
   border-radius: 2px;
@@ -199,10 +199,11 @@ input {
   /* background-image: url("./lax.png");
   background-size: 500px 190px;
   background-repeat: no-repeat; */
-  background-color: #2774AE;
-  color: #fff;
+  /*background-color: #2774AE;*/
+  background-image: linear-gradient(to right top, #08497a, #115387, #195e94, #2069a1, #2774ae);  
   padding: 1.3rem 3rem;
   font-size: 1.1em;
+  color: white;
   line-height: 1.4em;
   width: 300px;
   margin-left: auto;
@@ -282,7 +283,7 @@ i {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #2098D1;
+  background: #2774AE;
   height: 4px;
   -webkit-transform: translateY(4px);
   transform: translateY(4px);
@@ -333,7 +334,7 @@ li a:before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #2098D1;
+  background: #2774AE;
   height: 4px;
   -webkit-transform: translateY(4px);
   transform: translateY(4px);
