@@ -31,7 +31,7 @@ module.exports.updateRidersByID = async (req, res) => {
     console.log(_id);
     console.log(riders);
 
-    const ride = await RideModel.findByIdAndUpdate(_id, { riders });
+    const ride = await RideModel.findByIdAndUpdate(_id, { riders }, {new: true});
     res.send(ride);
 }
 

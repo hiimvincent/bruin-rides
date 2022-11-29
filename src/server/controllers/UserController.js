@@ -97,6 +97,6 @@ module.exports.updateUserByID = async (req, res) => {
   const lastName = req.body.lastName;
   const email = req.body.email;
 
-  const user = await userModel.findByIdAndUpdate(_id, { firstName, lastName, email });
+  const user = await userModel.findByIdAndUpdate(_id, { firstName, lastName, email }, {new: true});
   res.set(201).send(user);
 }

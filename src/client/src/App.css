@@ -37,6 +37,9 @@
   font-size: 1em;
   padding-left: .7rem;
 }
+.viewRideContent{
+  padding-top: 10vh;
+}
 
 .row {
   display: flex;
@@ -48,7 +51,6 @@
 .largeCol {
   flex: 2;
   padding-left: 5vh;
-  padding-top: 10vh;
   padding-right: 5vh;
 }
 
@@ -119,7 +121,6 @@ h2 {
 
 .h3RiderInfo{
   position: relative;
-  left: 66px;
 }
 
 .address{
@@ -223,6 +224,13 @@ input {
   
 }
 
+.viewComponent{
+  background-color: #d8d8d8;  
+  border-radius: 20px;
+}
+.viewButton{
+  width: 50%;
+}
 
 
 
@@ -322,6 +330,15 @@ li{
 
 .noRides{
   left: 0px;
+}
+
+.viewRideLabel{
+  left: 0px;
+}
+
+.viewRideLabelSmall{
+  left: 0px;
+  font-size: 1em;
 }
 
 logo {

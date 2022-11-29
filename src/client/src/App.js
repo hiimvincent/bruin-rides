@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 
 import './App.css';
-import RideComponent from './components/RideComponent'
 import RenderedWebpage from './RenderedWebpage';
 
 function App() {

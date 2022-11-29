@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 
 import '../App.css';
-import RideComponent from './RideComponent'
 import Ride from './Ride';
 import { ProgressBar } from  'react-loader-spinner'
 import { Button } from '@mui/material';
