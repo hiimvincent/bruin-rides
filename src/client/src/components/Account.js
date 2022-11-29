@@ -5,6 +5,7 @@ import { useAuth } from "../Auth";
 import AccountRide from './AccountRide';
 import { ProgressBar } from  'react-loader-spinner'
 import Ride from "./Ride";
+import { Link } from "react-router-dom";
 
 
 function Account() {
@@ -27,8 +28,9 @@ function Account() {
             setRender(
             <div>
             <h1>{result.data[0].firstName} {result.data[0].lastName}'s Rides:</h1>
+            {res.data.length > 0 ?
             <div className='rides'>
-              {res.data.sort((a, b) => {
+              { res.data.sort((a, b) => {
                   let d1 = Date.parse(a.date);
                   let d2 = Date.parse(b.date);
                   return d1 - d2;
@@ -36,8 +38,11 @@ function Account() {
                 .map(ride => <Ride
                   key={ride._id}
                   details={ride}
-              />)}
+              />) }
               </div>
+              : 
+              <center><h2 className="noRides">No rides yet! Get started by <Link to="/search">joining a ride</Link> or <Link to="/add">creating your own!</Link></h2></center>
+                }
             </div>
             )
           }) 

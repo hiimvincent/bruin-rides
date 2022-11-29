@@ -320,6 +320,10 @@ li{
   float: right;
 }
 
+.noRides{
+  left: 0px;
+}
+
 logo {
   float: left;
   width: 270px;
