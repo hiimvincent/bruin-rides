@@ -24,7 +24,7 @@ function RouteHeader() {
 
     return (
         <div className="App">
-            <div className="container">
+            <div className="navbar">
                 <ul class="ulHeader">
                     {user ? 
                     <li>
