@@ -58,16 +58,16 @@ export default function Ride({details, onDelete}) {
 
     return (
         <div className="item">
-            <div className="address">Region: {details.region}</div>
-            <div className="address">Destination: {details.destination}</div>
+            <div className="address"><div className='category'><b>Region</b></div>{details.region}</div>
+            <div className="address"><div className='category'><b>Destination</b></div> {details.destination}</div>
             
-            <div className="date">Ride Date: {details.date}</div>
-            <div className="time">Time: {details.time}</div>
-            <div className="grpSize">Riders: {details.riders.length} / {details.grpSize}</div>
+            <div className="date"><div className='category'><b>Date</b></div> {details.date}</div>
+            <div className="time"><div className='category'><b>Time</b></div> {details.time}</div>
+            <div className="grpSize"><div className='category'><b>Riders</b></div> {details.riders.length} / {details.grpSize}</div>
             <div className ="CapacityBar">
                 {capacity.map((item) => (<CapacityBar completed={item.completed} />))}
             </div>
-            <div className="desc">Description: {details.desc}</div>
+            <div className="desc"><div className='category'><b>Description</b></div> {details.desc}</div>
             <Button variant="contained" color="primary" sx={{color: 'black', backgroundColor: 'white', fontWeight: 'bold', m: 1}}  onClick={updateRiders}>{joinOrLeave}</Button>
             <Button component={Link} to={"/view?rideid=" + details._id} variant="contained" color="primary" sx={{m: 1}} >More Details</Button>
 

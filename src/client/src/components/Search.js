@@ -63,7 +63,9 @@ function Search() {
   return (
     <div className="App">
       <div className="container">
-        <h1>Search Rides</h1>
+        <div className='searchHeader'>
+          <h1>Search</h1>
+        </div>
             <div>
               <div className='filter'>
                 <div class="filterField">
@@ -96,8 +98,11 @@ function Search() {
             </div>
 
             <div classname="list">
-                {toRender ? 
-                  toRender : 
+            {toRender ?
+                  <div className='rides'>
+                  {toRender} 
+                  </div>
+                  :
                   <center>
                   <ProgressBar
                       height="80"
