@@ -58,6 +58,11 @@
   flex:1;
 }
 
+.imgCol{
+  margin-right: 7vh;
+  margin-top: 5vh;
+}
+
 .container {
   max-width: 100vw;
   padding: 0 1rem;
