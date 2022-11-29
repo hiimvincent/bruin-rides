@@ -41,7 +41,7 @@ function Account() {
               />) }
               </div>
               : 
-              <center><h2 className="noRides">No rides yet! Get started by <Link to="/search">joining a ride</Link> or <Link to="/add">creating your own!</Link></h2></center>
+              <center><h2 className="noRides"> Get started by <Link to="/search">joining a ride</Link> or <Link to="/add">creating your own!</Link></h2></center>
                 }
             </div>
             )

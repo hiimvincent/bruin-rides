@@ -110,18 +110,20 @@ export default function ViewComponent({rideIDParam}) {
 
     return (
         <div> 
-            {rideInfo && rideInfo.time ?
+          {rideInfo && rideInfo.time ?
             <div>
-            <div className="viewComponent">
-            <h2 className="viewRideLabel">{rideInfo.region}: {rideInfo.destination}</h2>
-            <h2 className="viewRideLabelSmall">{rideInfo.date} {formatAMPM(rideInfo.time)}</h2>
-            <br/> 
-            <h2 className="viewRideLabelSmall">Description: {rideInfo.desc}</h2>  
-            <br/> 
-            <br/> 
+              <br/> 
+              <br/> 
+              <div className="viewComponent">
+              <h2 className="viewRideLabel">{rideInfo.region}: {rideInfo.destination}</h2>
+              <h2 className="viewRideLabelSmall">{rideInfo.date} {formatAMPM(rideInfo.time)}</h2>
+              <br/> 
+              <h2 className="viewRideLabelSmall">Description: {rideInfo.desc}</h2>  
+              <br/> 
+              <br/> 
             </div> 
             <br/> 
-
+            <br/> 
 
             <div className="viewComponent">
             <h2 className="viewRideLabel">Riders: {rideInfo.riders ? rideInfo.riders.length : "0"}/{rideInfo.grpSize}</h2>
@@ -146,6 +148,7 @@ export default function ViewComponent({rideIDParam}) {
             }
             <br/>
             </div> 
+            <br/> 
             <br/> 
 
 
