@@ -149,7 +149,7 @@ export default function ViewComponent({rideIDParam}) {
             <br/> 
 
 
-            <Button variant="contained" className="viewButton" onClick={updateRiders}>
+            <Button variant="contained" className="viewButton" onClick={updateRiders} disabled={rideInfo && rideInfo.riders && rideInfo.riders.length >= rideInfo.grpSize}>
         {(user && rideInfo && rideInfo.riders && rideInfo.riders.includes(user)) ? "Leave Ride" : 
           (rideInfo && rideInfo.riders && rideInfo.riders.length < rideInfo.grpSize ? "Join Ride" : "Ride Full")}
         </Button>
