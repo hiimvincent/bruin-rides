@@ -4,6 +4,7 @@ import axios from "axios";
 import { useAuth } from "../Auth";
 import AccountRide from './AccountRide';
 import { ProgressBar } from  'react-loader-spinner'
+import Ride from "./Ride";
 
 
 function Account() {
@@ -26,15 +27,17 @@ function Account() {
             setRender(
             <div>
             <h1>{result.data[0].firstName} {result.data[0].lastName}'s Rides:</h1>
+            <div className='rides'>
               {res.data.sort((a, b) => {
                   let d1 = Date.parse(a.date);
                   let d2 = Date.parse(b.date);
                   return d1 - d2;
                 })
-                .map(ride => <AccountRide
+                .map(ride => <Ride
                   key={ride._id}
                   details={ride}
               />)}
+              </div>
             </div>
             )
           }) 
@@ -47,9 +50,12 @@ function Account() {
     return (
         <div className="App">
             <div className="container">
+            <div classname="list">
+
             { 
             toRender ? 
-            toRender : 
+            toRender
+             : 
               <center>
                 <ProgressBar
                     height="80"
@@ -62,6 +68,7 @@ function Account() {
                   />
               </center>
             }
+            </div>
             </div>
         </div>
         );

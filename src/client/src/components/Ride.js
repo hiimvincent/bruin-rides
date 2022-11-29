@@ -15,6 +15,15 @@ export default function Ride({details, onDelete}) {
     const hasJoined = user && details.riders.includes(user);
     const joinOrLeave = hasJoined ? "Leave Ride" : "Join Ride";
 
+    function formatAMPM(date) {
+        var hours = date.substring(0, 2)
+        var minutes = date.substring(3, 5);
+        var ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+      }
 
     const updateRiders = () => {
         console.log(details);
@@ -62,13 +71,19 @@ export default function Ride({details, onDelete}) {
             <div className="address"><div className='category'><b>Destination</b></div> {details.destination}</div>
             
             <div className="date"><div className='category'><b>Date</b></div> {details.date}</div>
-            <div className="time"><div className='category'><b>Time</b></div> {details.time}</div>
+            <div className="time"><div className='category'><b>Time</b></div> {formatAMPM(details.time)}</div>
             <div className="grpSize"><div className='category'><b>Riders</b></div> {details.riders.length} / {details.grpSize}</div>
             <div className ="CapacityBar">
                 {capacity.map((item) => (<CapacityBar completed={item.completed} />))}
             </div>
             <div className="desc"><div className='category'><b>Description</b></div> {details.desc}</div>
-            <Button variant="contained" color="primary" sx={{color: 'black', backgroundColor: 'white', fontWeight: 'bold', m: 1}}  onClick={updateRiders}>{joinOrLeave}</Button>
+            
+            {(details.riders.length < details.grpSize || hasJoined) ?
+                <Button variant="contained" color="primary" sx={{color: 'black', backgroundColor: 'white', fontWeight: 'bold', m: 1}}  onClick={updateRiders}>{joinOrLeave}</Button>
+            :
+                <Button variant="contained" disabled color="primary" sx={{color: 'black', backgroundColor: 'white', fontWeight: 'bold', m: 1}} >Ride Full</Button>
+
+            }
             <Button component={Link} to={"/view?rideid=" + details._id} variant="contained" color="primary" sx={{m: 1}} >More Details</Button>
 
         </div>
