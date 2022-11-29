@@ -8,13 +8,6 @@ import bear from '../BruinBear.jpg';
 import '../App.css';
 import RideShareComponent from './RideShareComponent'
 
-const imageStyle = {
-  height: 400,
-  width: 400,
-  borderRadius: "25px",
-  padding: "10px"
-}
-
 function Home() {
 
   return (
@@ -60,7 +53,7 @@ function Home() {
               />)} */}
     </div>
     <div className="smallCol">
-      <img src ={bear} style={imageStyle}/>
+      <img className="homeImage" src ={bear}/>
     </div>
   </div>
 </center>

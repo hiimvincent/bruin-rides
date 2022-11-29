@@ -23,53 +23,53 @@ function RouteHeader() {
     };
 
     return (
-        <div className="App">
-            <div className="container">
-                <ul class="ulHeader">
-                    {user ? 
-                    <li>
-                        <Link to="/search" onClick={logout}>Log Out</Link> 
-                    </li>
-                    : <div/>}
+        <div>
+            <ul class="ulHeader">
+                {user ? 
+                <li className='routeHeader'>
+                    <Link to="/search" onClick={logout}>Log Out</Link> 
+                </li>
+                : <div/>}
 
-                    {user ? 
-                    <div>
-                    <li>
-                        <Link to="/edit"><FiSettings/></Link>
-                    </li>
-                    <li>
-                        <Link to="/account"> <BsPersonCircle/> </Link>
-                    </li> 
-                    </div>
-                    :
-                    <li>
-                        <Link to="/login">Login</Link>
-                    </li>
-                    }
+                {user ? 
+                <div>
+                <li className='routeHeader'>
+                    <Link to="/edit"><FiSettings/></Link>
+                </li>
+                <li className='routeHeader'>
+                    <Link to="/account"> <BsPersonCircle/> </Link>
+                </li> 
+                </div>
+                :
+                <li className='routeHeader'>
+                    <Link to="/login">Login</Link>
+                </li>
+                }
 
-                    <li>
-                        <Link to="/about">About</Link>
-                    </li>
+                <li className='routeHeader'>
+                    <Link to="/about">About</Link>
+                </li>
 
-                    {user ? 
-                    <li>
-                        <Link to="/add">Add Ride</Link>
-                    </li>
-                    : <div/>}
-                    
+                {user ? 
+                <li className='routeHeader'>
+                    <Link to="/add">Add Ride</Link>
+                </li>
+                : <div/>}
+                
 
-                    <li>
-                        <Link to="/search">Search</Link>
-                    </li>
+                <li className='routeHeader'>
+                    <Link to="/search">Search</Link>
+                </li>
 
-                    <logo>
+                <logo>
+                    <Link to="/search" style={{ textDecoration: 'none', color: "#000000" }}>
                         <img src={logo} alt="Logo" width="70" />
                         <h2> Bruin Rides </h2>
-                    </logo>
-                </ul>
-                
-                <Outlet />
-            </div>
+                    </Link>
+                </logo>
+            </ul>
+            
+            <Outlet />
         </div>
     );
 }

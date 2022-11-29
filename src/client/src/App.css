@@ -45,6 +45,7 @@
   flex: 2;
   padding-left: 5vh;
   padding-top: 10vh;
+  padding-right: 5vh;
 }
 
 .smallCol{
@@ -112,6 +113,18 @@ h2 {
 .category{
   display: inline-block; 
   width: 120px;
+}
+
+	
+.homeImage{
+  position: relative;
+  float: left;
+  left: 0px;
+  top: 1px;
+  height: auto;
+  width: auto;
+  margin: 10px;
+  border-radius: 25px;
 }
 
 img {
@@ -218,6 +231,11 @@ i {
   background-color: white;
   border-bottom: 1px solid #2774AE;
   height: 75px;
+}
+
+.routeHeader{
+  font-size: 25px;
+  padding-top: 5px;
 }
 
 li{
