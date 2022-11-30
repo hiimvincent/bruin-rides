@@ -15,13 +15,13 @@ const RideForm = () => {
     date: "",
     time: "",
     desc: "",
-    grpSize: 2
+    grpSize: "2"
   });
   const destination = values.destination
   const date = values.date
   const time = values.time
   const desc = values.desc
-  const grpSize = values.grpSize
+  const grpSize = parseInt(values.grpSize)
   const riders = [user];
 
   const [sel, setSel] = useState("");
@@ -43,7 +43,7 @@ const RideForm = () => {
             date: "",
             time: "",
             desc: "",
-            grpSize: 2
+            grpSize: "2"
           });
           setRegion("")
 
@@ -67,6 +67,13 @@ const RideForm = () => {
 
   const locations = ["LAX", "Downtown", "Hollywood", "Koreatown", "Santa Monica", "Burbank"]
 
+  const curr = new Date();
+  const utcDate = new Date(curr.toUTCString());
+  utcDate.setHours(utcDate.getHours()-8);
+  const pstcur = new Date(utcDate);
+  const currDate = pstcur.toISOString().substring(0,10);
+  
+
   //Initializing props for ride form input fields
   const inputs = [
     {
@@ -80,9 +87,12 @@ const RideForm = () => {
     {
       id: 2,
       name: "grpSize",
-      type: "number",
+      type: "text",
       placeholder: "Group Limit",
       label: "Group Limit",
+      errorMessage:
+        "Group limit must be integer greater than 2",
+      pattern: `^[0-9]*$`,
       required: true,
     },
     {
@@ -92,6 +102,7 @@ const RideForm = () => {
       placeholder: "Date",
       label: "Date",
       required: true,
+      min: currDate
     },
     {
         id: 4,

@@ -13,7 +13,7 @@ import santamonicaPic from "../components/background_photos/SantaMonica.jpg"
 import burbankPic from "../components/background_photos/Burbank.jpg"
 
 
-export default function Ride({details, onDelete}) {
+export default function Ride({details, onDelete, onUpdateParam = () => {}}) {
     const { user, setUser } = useAuth();
     const navigate = useNavigate();
     const capacity = [{completed: (details.riders.length/details.grpSize)*100}];
@@ -73,7 +73,10 @@ export default function Ride({details, onDelete}) {
 
             //Remove ride ID from user database entry
             axios.post("http://localhost:5000/auth/remove-user-rides-by-id", { user, rideID })
-            .then((res) => console.log(res.data)) 
+            .then((res) => {
+                console.log(res.data);
+                onUpdateParam();
+            }) 
             .catch((err) => console.log(err));
         } 
         //If user not authenticated, then redirect to login page

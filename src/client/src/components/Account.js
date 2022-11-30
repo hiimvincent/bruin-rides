@@ -42,6 +42,7 @@ function Account() {
                 .map(ride => <Ride
                   key={ride._id}
                   details={ride}
+                  onUpdateParam = {fetchData}
               />) }
             </div>
             : 
