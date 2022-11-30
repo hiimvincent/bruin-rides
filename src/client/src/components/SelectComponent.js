@@ -9,12 +9,14 @@ const SelectComponent = React.forwardRef(
   ) => {
     const [inputValue, setInputValue] = useState(placeholder);
 
+    //Upon creation of component, set input value to parameter selectedKey
     useEffect(() => {
       if (selectedKey) {
         setInputValue(options.find((o) => o.key === selectedKey).value);
       }
     }, [selectedKey, options]);
 
+    //Upon creation of component, set input value to parameter selectedKey
     useEffect(() => {
       if (!open && options.findIndex((o) => o.value === inputValue) === -1) {
         if (!inputValue) {
@@ -29,6 +31,7 @@ const SelectComponent = React.forwardRef(
       }
     }, [open, options, selectedKey, inputValue, onChange]);
 
+    //If select changes, update the state
     const onInputChange = (e) => {
       setInputValue(e.target.value);
     };
@@ -37,17 +40,20 @@ const SelectComponent = React.forwardRef(
       setOpen((prevValue) => !prevValue);
     };
 
+    //Funciton to update dropdown state upon option selection
     const onOptionSelected = (option) => {
       onChange !== undefined && onChange(option.key);
       onChange !== undefined && setInputValue(option.value);
       setOpen(false);
     };
 
+    //Function to clear dropdown state
     const clearDropdown = () => {
       setInputValue("");
       onChange("");
     };
 
+    //Render select component as a stylized input text field with options
     return (
       <div className="dropdown-container" ref={ref}>
         <label>{label}</label>

@@ -1,15 +1,9 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import axios from "axios";
-import logo from '../blue.png';
 import bear from '../BruinBear.jpg';
 
 
 import '../App.css';
-import RideShareComponent from './RideShareComponent'
 
 function Home() {
-
   return (
     <div className="App">
       <div className="container"></div>

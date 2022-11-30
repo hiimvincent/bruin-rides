@@ -2,6 +2,8 @@ import React from "react";
 
 const CapacityBar = (props) => {
   const { completed } = props;
+
+  //Set Color for Capacity Bar
   let bgcolor;
   if (completed < 25) {
     bgcolor = '#ba0d0d';
@@ -13,6 +15,7 @@ const CapacityBar = (props) => {
     bgcolor = '#33b30c'
   }
   
+  //Style for container around bar
   const containerStyles = {
     height: 20,
     width: '100%',
@@ -21,6 +24,7 @@ const CapacityBar = (props) => {
     margin: 0,
   }
 
+  //Style for filler in bar
   const fillerStyles = {
     height: '100%',
     width: `${completed > 100 ? 100 : completed}%`,
@@ -30,12 +34,14 @@ const CapacityBar = (props) => {
     transition: 'width 1s ease-in-out',
   }
 
+  //Style for bar label
   const labelStyles = {
     padding: 5,
     color: 'white',
     fontWeight: 'bold'
   }
 
+  //Render the container and capacity bar
   return (
     <div style={containerStyles}>
       <div style={fillerStyles}>

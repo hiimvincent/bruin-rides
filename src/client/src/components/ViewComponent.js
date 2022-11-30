@@ -1,27 +1,17 @@
 import React from 'react'
-import { Link, Navigate } from "react-router-dom";
 import { Button }  from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useAuth } from "../Auth";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import CapacityBar from './CapacityBar';
-
-import lax from '../lax.png'
-import laxPic from "../components/background_photos/LAX.jpg"
-import downtownPic from "../components/background_photos/LADowntown.jpg"
-import hollywoodPic from "../components/background_photos/Hollywood.jpg"
-import koreatownPic from "../components/background_photos/Koreatown.jpg"
-import santamonicaPic from "../components/background_photos/SantaMonica.jpg"
-import burbankPic from "../components/background_photos/Burbank.jpg"
 
 
+//Function to process time stored in the database
 function formatAMPM(date) {
     var hours = date.substring(0, 2)
     var minutes = date.substring(3, 5);
     var ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
+    hours = hours ? hours : 12; // the hour '00' should be '12'
     var strTime = hours + ':' + minutes + ' ' + ampm;
     return strTime;
   }
@@ -31,8 +21,8 @@ export default function ViewComponent({rideIDParam}) {
   const { user, setUser } = useAuth();
   const [rideInfo, setRideInfo] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
-  const navigate = useNavigate();
 
+  //Format list of riders and contact details
   const listOfRiderInfo = () =>{
       const listItems = userInfo.map((r) =>
       r.firstName  || r.lastName ?
@@ -42,48 +32,54 @@ export default function ViewComponent({rideIDParam}) {
       );
       return <div>{listItems}</div>;
     }
-    console.log(userInfo)
-    
+
+  //Function to update riders upon joining or leaving a ride
   const updateRiders = () => {
-    console.log(rideInfo);
+    //If the user is authenticated, and has not joined ride, and ride has space, join the ride
     if (user && !rideInfo.riders.includes(user) && rideInfo.riders.length < rideInfo.grpSize) {
+      //Prep database endpoint data and add user to ride entry
       const rideID = rideInfo._id
       let riders = rideInfo.riders.map((x) => x);
       riders.push(user);
       axios.post("http://localhost:5000/update-riders-by-id", { rideID, riders })
       .then((res) => {
           setRideInfo(res.data)
-          console.log(res.data)
           axios.post("http://localhost:5000/auth/update-user-rides-by-id", { user, rideID })
           .then((res) => {console.log(res.data)
                           console.log(rideInfo)}) 
           .catch((err) => console.log(err));
           
+          //Add ride ID to user entry
           const userIDs = res.data.riders;
-          console.log(userIDs)
           axios.post("http://localhost:5000/auth/get-users-by-ids", { userIDs })
           .then((result) => setUserInfo(result.data))
           .catch((err) => console.log(err));
       }) 
       .catch((err) => console.log(err));
-    } else if (user && rideInfo.riders.includes(user)) {
+    } 
+    //If the user has already joined the ride, 
+    else if (user && rideInfo.riders.includes(user)) {
+      //Prep database endpoint data
       const rideID = rideInfo._id
       let riders = rideInfo.riders.map((x) => x);
       riders = riders.filter(function(value, index, arr){ 
           return value != user;
       });
+
+      //Update ride to remove current user
       axios.post("http://localhost:5000/update-riders-by-id", { rideID, riders })
       .then((res) => 
       {
         setRideInfo(res.data)
-        console.log(res.data)
+        
+        //remove ride from user database entry
         axios.post("http://localhost:5000/auth/remove-user-rides-by-id", { user, rideID })
         .then((result) => {console.log(result.data)
                         console.log(rideInfo)}) 
         .catch((err) => console.log(err));
 
+        //Get latest version of users on the ride (after current user has left)
         const userIDs = res.data.riders;
-        console.log(userIDs)
         axios.post("http://localhost:5000/auth/get-users-by-ids", { userIDs })
         .then((result) => setUserInfo(result.data))
         .catch((err) => console.log(err));
@@ -92,6 +88,7 @@ export default function ViewComponent({rideIDParam}) {
     }
   }
       
+  //Upon page load, get the ride details and users for the current ride and save in the state
   useEffect(() => {
     axios.post("http://localhost:5000/get-ride-by-id", { rideID })
       .then((res) => {
@@ -106,6 +103,7 @@ export default function ViewComponent({rideIDParam}) {
   }, [rideID])
 
 
+    //Render ViewComponent as ride details and rider details, the last of which only renders when joined. Render join/leave button.
     return (
         <div> 
           {rideInfo && rideInfo.time ?

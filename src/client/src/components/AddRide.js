@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react';
-import axios from "axios";
 import RideForm from './RideForm';
 
 import '../register.css';
 
-
+//Render Ride Form on Add Ride Page
 function AddRide() {
   return (
     <div className="rform">

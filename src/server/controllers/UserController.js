@@ -1,10 +1,13 @@
+//Using "RideSchema" as ride schema and "Profile" for user schema
 const userModel = require("../models/Profile");
 const RideModel = require("../models/RideSchema");
 const bcrypt = require("bcrypt");
 
+//Function to add new user to database (through Mongoose API)
 module.exports.signUp = async (req, res) => {
   const body = req.body;
 
+  //If request body incorrect, send error
   if (!body.email || !body.password) {
     return res.status(400).send({ error: "Data not formatted properly" });
   }
@@ -23,6 +26,7 @@ module.exports.signUp = async (req, res) => {
   user.save().then((doc) => res.status(201).send(doc));
 }
 
+//Function to confirm user is in database with email and password (using Mongoose API)
 module.exports.logIn = async (req, res) => {
   const body = req.body;
   const user = await userModel.findOne({ email: body.email });
@@ -39,6 +43,7 @@ module.exports.logIn = async (req, res) => {
   }
 }
 
+//Function to update rides on a user by the user ID and ride ID (using Mongoose API)
 module.exports.updateRides = async (req, res) => {
   const body = req.body;
   const user = await userModel.findById(body.user);
@@ -48,6 +53,7 @@ module.exports.updateRides = async (req, res) => {
   res.send(userUpdated);
 }
 
+//Function to delete ride from user by the user ID and ride ID (using Mongoose API)
 module.exports.deleteRides = async (req, res) => {
   const body = req.body;
   const user = await userModel.findById(body.user);
@@ -58,6 +64,7 @@ module.exports.deleteRides = async (req, res) => {
   res.send(userUpdated);
 }
 
+//Function to get ride details for a particular user by their user ID (using Mongoose API)
 module.exports.getUserRides = async (req, res) => {
   const userID = req.body.user;
 
@@ -78,7 +85,7 @@ module.exports.getUserRides = async (req, res) => {
   res.send(out);
 }
 
-
+//Function to get multiple user details by user IDs (using Mongoose API)
 module.exports.getUserByIDs = async (req, res) => {
   const userIDs = req.body.userIDs;
   let out = []
@@ -90,7 +97,7 @@ module.exports.getUserByIDs = async (req, res) => {
   res.send(out);
 }
 
-
+//Function to update user email and names by user ID (using Mongoose API)
 module.exports.updateUserByID = async (req, res) => {
   const _id = req.body.userID;
   const firstName = req.body.firstName;

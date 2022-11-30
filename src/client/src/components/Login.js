@@ -11,9 +11,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const { setUser, user } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
-
+  //On login button press, call database endpoint with email and password
   const login = useCallback(
     (e) => {
       e.preventDefault();
@@ -24,11 +23,13 @@ const Login = () => {
     [setUser, email, password]
   );
 
+  //Upon successful login, set authentication state and move to account page
   const successfulLogin = (userID) => {
     setUser(userID)
     navigate("/account");
   }
 
+  //Return login page: header, input fields, sign in button and sign up button
   return (
     <div className="rform">
       <form onSubmit={login}>

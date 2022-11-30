@@ -12,7 +12,7 @@ import SignUp from "./components/SignUp";
 import Account from "./components/Account";
 import EditAccount from "./components/EditAccount";
 
-
+//Rerturn webpage as route header and page body, with endpoints further protected under RequireAuth component
 const RenderedWebpage = () => {
     return (
         <div>

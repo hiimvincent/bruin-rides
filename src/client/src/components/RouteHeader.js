@@ -1,11 +1,7 @@
-import { useState, useEffect } from 'react';
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import axios from "axios";
-
 import logo from '../blue.png';
 
 import '../App.css';
-import { Button } from '@mui/material';
 import { useAuth } from "../Auth";
 
 import React from 'react'
@@ -16,12 +12,13 @@ function RouteHeader() {
     const { user, setUser } = useAuth();
     const navigate = useNavigate();
 
-    
+    //Function to clear authentication state and navigate to search page
     const logout = () => {
         setUser(null);
         navigate("/home")
     };
 
+    //Render site header with Logo and links to pages with dependency on authentication state
     return (
         <div>
             <ul class="ulHeader">

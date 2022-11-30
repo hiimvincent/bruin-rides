@@ -3,9 +3,10 @@ import { useLocation, Navigate, Outlet } from "react-router-dom";
 
 const AuthContext = createContext(null);
 
+//Initalize state to hold authentication
 export const useAuth = () => useContext(AuthContext);
 
-
+//Create auth provider
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [userID, setUserID] = useState(null);
@@ -17,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
-
+//Define functiont to require non null authentication state and to redirect to login
 export const RequireAuth = () => {
 const { user } = useAuth();
 const location = useLocation();

@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const { logIn, signUp, updateRides, deleteRides, getUserRides, getUserByIDs, updateUserByID } = require("../controllers/UserController");
 
+//Initializing router and connecting database endpoints to database functions
 const router = express.Router();
 
 router.post("/signup", signUp);

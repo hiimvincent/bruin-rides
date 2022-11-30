@@ -1,11 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
 import AddFixedInput from "./AddFixedInput";
-import SelectComponent from "./SelectComponent";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../Auth";
-import { BsPencilSquare } from 'react-icons/bs';
-import IconButton from '@mui/material/IconButton';
 
 import "../register.css";
 
@@ -25,7 +22,7 @@ const Edit = () => {
   const [lastNameActive, setLastNameActive] = useState(false);
   const [emailActive, setEmailActive] = useState(false);
 
-
+  //On page render, get user details from authenticated userID and store in state
   useEffect(() => {
     const userIDs = [user]
       axios.post("http://localhost:5000/auth/get-users-by-ids", { userIDs })
@@ -37,28 +34,32 @@ const Edit = () => {
       .catch((err) => console.log(err));
     })
 
+  //Store value to overwrite - defaults to current name/email
   const firstName = values.firstName == "" ? firstNameOld : values.firstName
   const lastName = values.lastName == "" ? lastNameOld : values.lastName
   const email = values.email == "" ? emailOld : values.email
   const navigate = useNavigate();
 
-  const signUp = useCallback(
+  //When edit button pressed, call database endpoint and update account
+  const edit = useCallback(
     (e) => {
       e.preventDefault();
       const userID = user
       if (values.firstName != "" || values.lastName != "" || values.email != "") {
         axios.post("http://localhost:5000/auth/update-user-by-id", { userID, email, firstName, lastName })
-        .then((res) => (res.status == 201 || res.status == 200) ? successfulSignUp() : console.log(res)) 
+        .then((res) => (res.status == 201 || res.status == 200) ? successfulEdit() : console.log(res)) 
         .catch((err) => console.log(err));
       }
       
     }
   );
 
-  const successfulSignUp = () => {
+  //When successful, navigate to account page to display new account
+  const successfulEdit = () => {
     navigate("/account");
   }
 
+  //Sets props for necessary input fields
   const inputs = [
     {
       id: 1,
@@ -94,10 +95,12 @@ const Edit = () => {
     }
   ];
 
+  //Create function to update state upon input change
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
   
+  //Create function to activate an input field by clicking icon
   const onClick = (id) =>{
     if (id == 1){
         setFirstNameActive(true)
@@ -110,10 +113,10 @@ const Edit = () => {
     }
   }
 
-
+  //Map input props into Fixed Input components, and call edit function upon form submission
   return (
     <div className="app">
-      <form onSubmit={signUp}>
+      <form onSubmit={edit}>
         <h1> Edit Account </h1>
         {inputs.map((input) => (
             <AddFixedInput

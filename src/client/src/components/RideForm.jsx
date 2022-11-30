@@ -27,12 +27,15 @@ const RideForm = () => {
   const [sel, setSel] = useState("");
   const [region, setRegion] = useState("");
 
+  //Upon clicking add ride, call database endpoint to add a new ride to our database
   const AddRide = () => {
     axios.post("http://localhost:5000/save-ride", { region, destination, date, time, desc, grpSize, riders })
       .then((res) => {
         console.log(res.data_id);
         const rideID = res.data._id
         console.log({user, rideID})
+
+        //Update user entry in database to include new ride id
         axios.post("http://localhost:5000/auth/update-user-rides-by-id", { user, rideID })
         .then((res) => {
           setValues({
@@ -43,6 +46,8 @@ const RideForm = () => {
             grpSize: 2
           });
           setRegion("")
+
+          //Navigate to search page on success
           navigate("/search");
         }) 
         .catch((err) => console.log(err));
@@ -50,6 +55,7 @@ const RideForm = () => {
       .catch((err) => console.log(err));
   }
 
+  //Ride regions
   const options = [
     { key: 1, value: "LAX" },
     { key: 2, value: "Downtown" },
@@ -61,6 +67,7 @@ const RideForm = () => {
 
   const locations = ["LAX", "Downtown", "Hollywood", "Koreatown", "Santa Monica", "Burbank"]
 
+  //Initializing props for ride form input fields
   const inputs = [
     {
       id: 1,
@@ -104,16 +111,18 @@ const RideForm = () => {
     
   ];
 
+  //Upon submit, call make sure fields are not default and call add ride function
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputs)
     AddRide();
   };
 
+  //Define function to update state from changes in input fields
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  //Return ride form with header, a select component for the region, and input fields aligning with the prop array
   return (
     <div>
       <form onSubmit={handleSubmit}>

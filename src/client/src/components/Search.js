@@ -15,7 +15,7 @@ const destLocs = [
   { key: "Burbank", value: "Burbank" },
 ]
 
-
+//Initialize current date
 const curr = new Date();
 const utcDate = new Date(curr.toUTCString());
 utcDate.setHours(utcDate.getHours()-8);
@@ -30,14 +30,17 @@ function Search() {
   const [fromTimeFilter, setFromTimeFilter] = useState(null);
   const [toTimeFilter, setToTimeFilter] = useState(null);
 
-
+  //On page load, fetch ride data
   useEffect(() => {
     fetchData();
   })
   
+  //Query database to get ride data and prepare it to be rendered
   const fetchData = () => {
+    //Call database endpoint
     axios.get("http://localhost:5000/get-all-rides")
     .then((res) => {
+      //Update render state to filter based on destination and time (if selected), and upon date. Sort the data and render each ride as an individual component.
       setRender(res.data.filter(ride => (dest == null ? true : ride.region == dest.target.value) 
           && (Date.parse(ride.date) >= Date.parse(dateFilter))
           && (toTimeFilter == null ? true : (parseInt(toTimeFilter.getHours() + 8) % 24 >= parseInt(ride.time.substring(0, ride.time.indexOf(":")))))
@@ -58,6 +61,7 @@ function Search() {
     .catch((err) => console.log(err));
   }
 
+  //Render header, filters, and queried ride state. Render a loading bar if queried state is empty. 
   return (
     <div className="App">
       <div className="container">

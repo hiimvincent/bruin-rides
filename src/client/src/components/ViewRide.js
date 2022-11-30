@@ -2,11 +2,9 @@ import React from "react";
 import { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
-  Link,
   useLocation
 } from "react-router-dom";
 import axios from "axios";
-import { Button } from '@mui/material';
 import { useAuth } from "../Auth";
 import ViewComponent from './ViewComponent'
 
@@ -26,18 +24,7 @@ const imageStyle = {
   marginRight: "50px",
 }
 
-const buttonStyle = {
-  width: 600,
-  maxWidth: "100%",
-  margin: "10px",
-  marginTop: "60px",
-}
-
-const cenStyle = {
-  maxWidth: "85%",
-  paddingTop: "40px",
-}
-
+//Hook to grab path url parameter
 function useQuery() {
     const { search } = useLocation();
     return React.useMemo(() => new URLSearchParams(search), [search]);
@@ -45,11 +32,11 @@ function useQuery() {
 
 function ViewRide() {
   let query = useQuery();
-  const { user, setUser } = useAuth();
+  //Initialize ride ID state with query parameter
   const [rideID, setRideID] = useState(query.get("rideid"));
   const [rideInfo, setRideInfo] = useState([]);
 
-
+  //Upon page loading, get rides corresponding to query parameter ride ID
   useEffect(() => {
     axios.post("http://localhost:5000/get-ride-by-id", { rideID })
       .then((res) => {
@@ -58,6 +45,7 @@ function ViewRide() {
       .catch((err) => console.log(err));
   }, [rideID])
 
+  //Determine which background image to render
   const getBackgroundImage = () =>{
     const locations = ["LAX", "Downtown", "Hollywood", "Koreatown", "Santa Monica", "Burbank"];
     switch (rideInfo.region){
@@ -76,6 +64,7 @@ function ViewRide() {
     }
   }
 
+  //Render page with region image and ViewComponent from ride details
   return (
     <div className="App">
       <center className="viewRideContent">

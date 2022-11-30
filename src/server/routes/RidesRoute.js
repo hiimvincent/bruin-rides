@@ -1,6 +1,7 @@
 const express = require("express");
 const { getAllRides, getRideByID, updateDescByID, updateRidersByID, saveRide, deleteRide, updateRide } = require("../controllers/RideController");
 
+//Initializing router and connecting database endpoints to database functions
 const router = express.Router();
 
 router.post("/update-riders-by-id", updateRidersByID);

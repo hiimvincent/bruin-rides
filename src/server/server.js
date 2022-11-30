@@ -6,6 +6,7 @@ require("dotenv").config();
 
 const cors = require("cors");
 
+//Initializing routers
 const routes = require("./routes/RidesRoute");
 const userRoutes = require("./routes/UserRoute");
 
@@ -23,7 +24,9 @@ mongoose
     .then(() => console.log("Connected to db..."))
     .catch((err) => console.error(err));
 
+//Using routers
 app.use(routes);
 app.use("/auth/", userRoutes);
 
+//Listening on preconfigured port for requests
 app.listen(PORT, () => console.log("Server running on port " + PORT));
