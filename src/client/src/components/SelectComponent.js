@@ -87,7 +87,8 @@ const SelectComponent = React.forwardRef(
               >
                 {opt.value}
               </div>
-            ))}
+            ))
+          }
         </div>
       </div>
     );

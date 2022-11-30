@@ -108,7 +108,6 @@ const RideForm = () => {
     e.preventDefault();
     console.log(inputs)
     AddRide();
-    //e.preventDefault();
   };
 
   const onChange = (e) => {
@@ -120,14 +119,14 @@ const RideForm = () => {
       <form onSubmit={handleSubmit}>
       <h1>Add Ride</h1>
         <SelectComponent
-            options={options}
-            onChange={(item) => {
-                setSel(item);
-                setRegion(locations[item - 1]);
-            }}
-            selectedKey={sel}
-            placeholder={"What region are you going to?"}
-            label="Region"
+          options={options}
+          onChange={(item) => {
+              setSel(item);
+              setRegion(locations[item - 1]);
+          }}
+          selectedKey={sel}
+          placeholder={"What region are you going to?"}
+          label="Region"
         />
         {inputs.map((input) => (
             <AddInput

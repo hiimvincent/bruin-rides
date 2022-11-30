@@ -15,20 +15,19 @@ const AddInput = (props) => {
     <div className="addinput">
       <label>{label}</label>
       <div class="d-flex justify-content-between">
-
         <input
-            {...inputProps}
-            onChange={onChange}
-            onBlur={handleFocus}
-            onFocus={() =>
+          {...inputProps}
+          onChange={onChange}
+          onBlur={handleFocus}
+          onFocus={() =>
             setFocused(true)
-            }
-            focused={focused.toString()}
+          }
+          focused={focused.toString()}
         />
-            <IconButton className="editAccountIcon" aria-label="edit" size="large" onClick={() => onClick(id)}>
-                <BsPencilSquare/>
-            </IconButton> 
-        </div>
+        <IconButton className="editAccountIcon" aria-label="edit" size="large" onClick={() => onClick(id)}>
+            <BsPencilSquare/>
+        </IconButton> 
+      </div>
       <span>{errorMessage}</span>
     </div>
   );

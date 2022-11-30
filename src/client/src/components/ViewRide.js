@@ -40,7 +40,6 @@ const cenStyle = {
 
 function useQuery() {
     const { search } = useLocation();
-  
     return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 
@@ -75,7 +74,6 @@ function ViewRide() {
       case locations[5]:
         return Burbank;
     }
-
   }
 
   return (
@@ -86,15 +84,13 @@ function ViewRide() {
             <img src ={getBackgroundImage()} style={imageStyle}/>
           </div>
           <div className="largeCol">
-            <ViewComponent
-          rideIDParam = {rideID}/>
+            <ViewComponent rideIDParam = {rideID}/>
           </div>
         </div>
         <br/><br/>
       </center>
     </div>
   );
-
 }
     
 export default ViewRide;

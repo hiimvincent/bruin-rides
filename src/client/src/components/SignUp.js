@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
+import Register from './Register';
 
 import '../App.css';
-import Register from './Register';
+
 
 function SignUp() {
   return (

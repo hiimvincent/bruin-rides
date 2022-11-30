@@ -31,26 +31,26 @@ const Login = () => {
 
   return (
     <div className="rform">
-        <form onSubmit={login}>
-        <h1> Login </h1>
-        <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email..."
-        />
-        <input
-            value={password}
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password..."
-        />
-        <button type="submit">Sign In</button>
-        <center>
-        <div>
-            <Button component={Link} to="/signup">Create Account</Button>
-        </div>
-        </center>
-        </form>
+      <form onSubmit={login}>
+      <h1> Login </h1>
+      <input
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email..."
+      />
+      <input
+        value={password}
+        type="password"
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password..."
+      />
+      <button type="submit">Sign In</button>
+      <center>
+      <div>
+          <Button component={Link} to="/signup">Create Account</Button>
+      </div>
+      </center>
+      </form>
     </div>
   );
 };

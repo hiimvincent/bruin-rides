@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from 'react';
-import "../register.css";
 import AddFixedInput from "./AddFixedInput";
 import SelectComponent from "./SelectComponent";
 import axios from "axios";
@@ -7,6 +6,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../Auth";
 import { BsPencilSquare } from 'react-icons/bs';
 import IconButton from '@mui/material/IconButton';
+
+import "../register.css";
+
 
 const Edit = () => {
   const [values, setValues] = useState({
@@ -38,7 +40,6 @@ const Edit = () => {
   const firstName = values.firstName == "" ? firstNameOld : values.firstName
   const lastName = values.lastName == "" ? lastNameOld : values.lastName
   const email = values.email == "" ? emailOld : values.email
-
   const navigate = useNavigate();
 
   const signUp = useCallback(
@@ -109,18 +110,19 @@ const Edit = () => {
     }
   }
 
+
   return (
     <div className="app">
       <form onSubmit={signUp}>
         <h1> Edit Account </h1>
         {inputs.map((input) => (
             <AddFixedInput
-                key={input.id}
-                {...input}
-                value={values[input.name]}
-                onChange={onChange}
-                onClick={onClick}
-                />                            
+              key={input.id}
+              {...input}
+              value={values[input.name]}
+              onChange={onChange}
+              onClick={onClick}
+            />                            
         ))}
         <button>Update</button>
       </form>

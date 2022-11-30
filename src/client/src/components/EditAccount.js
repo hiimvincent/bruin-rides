@@ -25,29 +25,29 @@ function EditAccount() {
     const [emailActive, setEmailActive] = useState(false);
 
     useEffect(() => {
-        const userIDs = [user]
-          axios.post("http://localhost:5000/auth/get-users-by-ids", { userIDs })
-          .then((result) => {
-            setFirstName(result.data[0].firstName)
-            setLastName(result.data[0].lastName)
-            setEmail(result.data[0].email)
-          })
-          .catch((err) => console.log(err));
-        }, [user])
+      const userIDs = [user]
+        axios.post("http://localhost:5000/auth/get-users-by-ids", { userIDs })
+        .then((result) => {
+          setFirstName(result.data[0].firstName)
+          setLastName(result.data[0].lastName)
+          setEmail(result.data[0].email)
+        })
+        .catch((err) => console.log(err));
+    }, [user])
 
     const updateAccount = (e) => {
-        e.preventDefault();
-        };
+      e.preventDefault();
+    };
 
     return (
-        <div className="App">
-            <div className="container">
-                <div className="rform"> 
-                    <Edit/>
-                </div>
-            </div>
+      <div className="App">
+        <div className="container">
+          <div className="rform"> 
+            <Edit/>
+          </div>
         </div>
-        );
+      </div>
+    );
 }
     
 export default EditAccount;

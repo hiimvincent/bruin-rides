@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
-
-
-// import '../App.css';
-import '../register.css';
 import RideForm from './RideForm';
+
+import '../register.css';
+
 
 function AddRide() {
   return (

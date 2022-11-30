@@ -1,10 +1,12 @@
 import { useState, useCallback } from "react";
-import "../register.css";
 import AddInput from "./AddInput";
 import SelectComponent from "./SelectComponent";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../Auth";
+
+import "../register.css";
+
 
 const Register = () => {
   const [values, setValues] = useState({

@@ -3,15 +3,16 @@ import React from "react";
 const CapacityBar = (props) => {
   const { completed } = props;
   let bgcolor;
-  if (completed < 25){
+  if (completed < 25) {
     bgcolor = '#ba0d0d';
-  } else if (completed >= 25 && completed < 50 ){
+  } else if (completed >= 25 && completed < 50 ) {
     bgcolor = '#de6a1d';
-  } else if (completed >= 50 && completed < 75 ){
+  } else if (completed >= 50 && completed < 75 ) {
     bgcolor = '#e0ba0d';
-  } else{
+  } else {
     bgcolor = '#33b30c'
   }
+  
   const containerStyles = {
     height: 20,
     width: '100%',

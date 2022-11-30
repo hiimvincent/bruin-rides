@@ -26,24 +26,24 @@ function RouteHeader() {
         <div>
             <ul class="ulHeader">
                 {user ? 
-                <li className='routeHeader'>
-                    <Link to="/search" onClick={logout}><b>Log Out</b></Link> 
-                </li>
+                    <li className='routeHeader'>
+                        <Link to="/search" onClick={logout}><b>Log Out</b></Link> 
+                    </li>
                 : <div/>}
 
                 {user ? 
-                <div>
-                <li className='routeHeader'>
-                    <Link to="/edit"><FiSettings size="20"/></Link>
-                </li>
-                <li className='routeHeader'>
-                    <Link to="/account"> <BsPersonCircle size="20"/> </Link>
-                </li> 
-                </div>
-                :
-                <li className='routeHeader'>
-                    <Link to="/login"><b>Login</b></Link>
-                </li>
+                    <div>
+                        <li className='routeHeader'>
+                            <Link to="/edit"><FiSettings size="20"/></Link>
+                        </li>
+                        <li className='routeHeader'>
+                            <Link to="/account"> <BsPersonCircle size="20"/> </Link>
+                        </li> 
+                    </div>
+                    :
+                    <li className='routeHeader'>
+                        <Link to="/login"><b>Login</b></Link>
+                    </li>
                 }
 
                 <li className='routeHeader'>
@@ -51,12 +51,12 @@ function RouteHeader() {
                 </li>
 
                 {user ? 
-                <li className='routeHeader'>
-                    <Link to="/add"><b>Add Ride</b></Link>
-                </li>
-                : <div/>}
+                    <li className='routeHeader'>
+                        <Link to="/add"><b>Add Ride</b></Link>
+                    </li>
+                    : <div/>
+                }
                 
-
                 <li className='routeHeader'>
                     <Link to="/search"><b>Search</b></Link>
                 </li>
@@ -68,7 +68,6 @@ function RouteHeader() {
                     </Link>
                 </logo>
             </ul>
-            
             <Outlet />
         </div>
     );
