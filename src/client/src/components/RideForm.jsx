@@ -118,6 +118,7 @@ const RideForm = () => {
         type: "text",
         placeholder: "Put any extra information here",
         label: "Description",
+        required: true,
     },
     
   ];
