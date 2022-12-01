@@ -40,6 +40,11 @@ cd ../client
 npm install
 ```
 
+make a file called .env in server and copy the following text into it:
+``` 
+DATABASE_URL=mongodb+srv://bruinshare:EggInTheChat432@cluster0.bfkil8w.mongodb.net/?retryWrites=true&w=majority
+```
+
 Then start the backend in ```src/server``` by running:
 ```
 npm run devStart
