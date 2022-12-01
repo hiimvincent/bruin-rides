@@ -40,9 +40,9 @@ cd ../client
 npm install
 ```
 
-make a file called .env in server and copy the following text into it:
+Create a file called ```.env``` in ```src/server``` and paste in the mongoDB API key:
 ``` 
-DATABASE_URL=mongodb+srv://bruinshare:EggInTheChat432@cluster0.bfkil8w.mongodb.net/?retryWrites=true&w=majority
+DATABASE_URL=mongodb+srv://INSERT_API_KEY_HERE
 ```
 
 Then start the backend in ```src/server``` by running:
@@ -55,6 +55,16 @@ Finally, run the frontend from ```src/client``` locally with:
 npm start
 ```
 
+## More Info
+
+More information about the project structure and design can be found using the following links:
+
+[Presentation Slides](https://docs.google.com/presentation/d/13tyhhxncBWvAt1bGz-lyz6WBvLOqO-0GKxVdkrW4zyc/edit?usp=sharing)
+
+[Project Proposal](https://docs.google.com/document/d/184NQZ7YtGccJ1xOpeU93VNF680S57QEdOa7TqZwsF7w/edit?usp=sharing)
+
+[Project Timeline](https://docs.google.com/document/d/1hySZwTxMKwEKLpYeaiA2VunZeTdlS-ZPaws4GEH8LXg/edit?usp=sharing)
+
 ## Credit
 
 This project was a collaboration by:
@@ -64,6 +74,3 @@ This project was a collaboration by:
 - Ryan Lee
 - Satyen Subramaniam
 - Vincent Johnson
-
-
-
