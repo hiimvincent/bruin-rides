@@ -1,82 +1,85 @@
 import React from "react";
+import { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
-  Link,
   useLocation
 } from "react-router-dom";
-import { useState, useEffect } from 'react';
 import axios from "axios";
-import { Button } from '@mui/material';
 import { useAuth } from "../Auth";
+import ViewComponent from './ViewComponent'
+
+import Burbank from "./background_photos/Burbank.jpg";
+import Hollywood from "./background_photos/Hollywood.jpg";
+import Koreatown from "./background_photos/Koreatown.jpg";
+import LADowntown from "./background_photos/LADowntown.jpg";
+import LAX from "./background_photos/LAX.jpg";
+import SantaMonica from "./background_photos/SantaMonica.jpg";
 
 
+const imageStyle = {
+  height: 400,
+  width: 400,
+  borderRadius: "25px",
+  padding: "10px",
+  marginRight: "50px",
+}
+
+//Hook to grab path url parameter
 function useQuery() {
     const { search } = useLocation();
-  
     return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 
 function ViewRide() {
-    let query = useQuery();
-    const { user, setUser } = useAuth();
-    const [rideID, setRideID] = useState(query.get("rideid"));
-    const [rideInfo, setRideInfo] = useState([]);
-    const [desc, setDesc] = useState("");
+  let query = useQuery();
+  //Initialize ride ID state with query parameter
+  const [rideID, setRideID] = useState(query.get("rideid"));
+  const [rideInfo, setRideInfo] = useState([]);
 
-    useEffect(() => {
-        axios.post("http://localhost:5000/get-ride-by-id", { rideID })
-          .then((res) => setRideInfo(res.data)) 
-          .catch((err) => console.log(err));
-      })
+  //Upon page loading, get rides corresponding to query parameter ride ID
+  useEffect(() => {
+    axios.post("http://localhost:5000/get-ride-by-id", { rideID })
+      .then((res) => {
+        setRideInfo(res.data)
+      }) 
+      .catch((err) => console.log(err));
+  }, [rideID])
 
-    const updateRideDesc = () => {
-        axios.post("http://localhost:5000/update-desc-by-id", { rideID, desc })
-        .then((res) => setRideInfo(res.data)) 
-        .catch((err) => console.log(err));
+  //Determine which background image to render
+  const getBackgroundImage = () =>{
+    const locations = ["LAX", "Downtown", "Hollywood", "Koreatown", "Santa Monica", "Burbank"];
+    switch (rideInfo.region){
+      case locations[0]:
+        return LAX;
+      case locations[1]:
+          return LADowntown;
+      case locations[2]:
+            return Hollywood;
+      case locations[3]:
+        return Koreatown;
+      case locations[4]:
+        return SantaMonica;
+      case locations[5]:
+        return Burbank;
     }
+  }
 
-    const updateRiders = () => {
-      console.log(user);
-      if (user && !rideInfo.riders.includes(user) && rideInfo.riders.length < rideInfo.grpSize) {
-        let riders = rideInfo.riders.map((x) => x);
-        riders.push(user);
-        axios.post("http://localhost:5000/update-riders-by-id", { rideID, riders })
-        .then((res) => setRideInfo(res.data)) 
-        .catch((err) => console.log(err));
-
-
-        axios.post("http://localhost:5000/auth/update-user-rides-by-id", { user, rideID })
-        .then((res) => setRideInfo(res.data)) 
-        .catch((err) => console.log(err));
-        }
-    }
-    
-    return (
-        <div className="App">
-            <div className="container">
-            <h1>View Ride: {rideID}</h1>
-            </div>
-
-            <div><Button variant="contained" onClick={updateRiders}>Join Ride!</Button></div>
-            {user && rideInfo && rideInfo.riders && user == rideInfo.riders[0] ? 
-              <div><input
-              type="text"
-              placeholder='Update Ride Description...'
-              value={desc}
-              onChange={(e) => setDesc(e.target.value)} />
-              <div><Button variant="contained" onClick={updateRideDesc}>Update Ride Desc!</Button></div></div> 
-            : <div/>}
-
-            <div className="riders">Riders Joined: {rideInfo.riders ? rideInfo.riders.length : ""}</div> 
-            <div className="address">{rideInfo.address}</div>
-            <div className="date">Ride Date: {rideInfo.date}</div>
-            <div className="time">Time: {rideInfo.time}</div>
-            <div className="grpSize">Group Size: {rideInfo.grpSize}</div>
-            <div className="address">Region: {rideInfo.region}</div>
-            <div className="address">Destination: {rideInfo.destination}</div>
-            <div className="desc">Description: {rideInfo.desc}</div>
+  //Render page with region image and ViewComponent from ride details
+  return (
+    <div className="App">
+      <center className="viewRideContent">
+        <div className="row">
+          <div className="smallCol">
+            <img src ={getBackgroundImage()} style={imageStyle}/>
+          </div>
+          <div className="largeCol">
+            <ViewComponent rideIDParam = {rideID}/>
+          </div>
         </div>
-        );
+        <br/><br/>
+      </center>
+    </div>
+  );
 }
     
 export default ViewRide;

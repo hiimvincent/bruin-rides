@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
+import RenderedWebpage from './RenderedWebpage';
 
 import './App.css';
-import RideComponent from './components/RideComponent'
-import RenderedWebpage from './RenderedWebpage';
 
 function App() {
   return (
+    //Render webpage
     <RenderedWebpage/>
   );
 }
-
-//TODO: Render webpage based on app context...
 
 export default App;

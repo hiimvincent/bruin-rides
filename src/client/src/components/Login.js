@@ -11,9 +11,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const { setUser, user } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
-
+  //On login button press, call database endpoint with email and password
   const login = useCallback(
     (e) => {
       e.preventDefault();
@@ -24,31 +23,35 @@ const Login = () => {
     [setUser, email, password]
   );
 
+  //Upon successful login, set authentication state and move to account page
   const successfulLogin = (userID) => {
     setUser(userID)
     navigate("/account");
   }
 
+  //Return login page: header, input fields, sign in button and sign up button
   return (
-    <div>
-        <h1>Login</h1>
-        <form onSubmit={login}>
-        <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email..."
-        />
-        <input
-            value={password}
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password..."
-        />
-        <Button type="submit">Login</Button>
-        </form>
-        <div>Don't have an account?
-            <Button component={Link} to="/signup">Sign Up!</Button>
-        </div>
+    <div className="rform">
+      <form onSubmit={login}>
+      <h1> Login </h1>
+      <input
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email..."
+      />
+      <input
+        value={password}
+        type="password"
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password..."
+      />
+      <button type="submit">Sign In</button>
+      <center>
+      <div>
+          <Button component={Link} to="/signup">Create Account</Button>
+      </div>
+      </center>
+      </form>
     </div>
   );
 };

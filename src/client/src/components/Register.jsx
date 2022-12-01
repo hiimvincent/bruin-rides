@@ -1,10 +1,10 @@
 import { useState, useCallback } from "react";
-import "../register.css";
 import AddInput from "./AddInput";
-import SelectComponent from "./SelectComponent";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../Auth";
+import { useNavigate } from "react-router-dom";
+
+import "../register.css";
+
 
 const Register = () => {
   const [values, setValues] = useState({
@@ -22,6 +22,7 @@ const Register = () => {
 
   const navigate = useNavigate();
 
+  //Sign up function to be called when sign up button pressed - calls database endpoint with specified data
   const signUp = useCallback(
     (e) => {
       e.preventDefault();
@@ -31,10 +32,12 @@ const Register = () => {
     }
   );
 
+  //upon successful signUp, navigate to login page to allow user to login
   const successfulSignUp = () => {
     navigate("/login");
   }
 
+  //Create props for input fields
   const inputs = [
     {
       id: 1,
@@ -84,12 +87,14 @@ const Register = () => {
     },
   ];
 
+  //Create function to update state when input fields change
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  //Render SignUp form with header, input props mapped to input components, and register button that calls sign up function
   return (
-    <div className="app">
+    <div className="rform">
       <form onSubmit={signUp}>
         <h1>Create Account</h1>
         {inputs.map((input) => (

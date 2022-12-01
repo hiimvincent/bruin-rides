@@ -2,13 +2,9 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 
 import '../App.css';
-import RideComponent from './RideComponent'
 import Ride from './Ride';
-import { Select, MenuItem, TextField, InputLabel, FormControl } from '@mui/material';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker, TimePicker } from '@mui/x-date-pickers';
-import { Dayjs } from 'dayjs';
+import { ProgressBar } from  'react-loader-spinner'
+import { Button } from '@mui/material';
 
 const destLocs = [
   { key: "LAX", value: "LAX" },
@@ -19,115 +15,124 @@ const destLocs = [
   { key: "Burbank", value: "Burbank" },
 ]
 
-const fromLocs = [
-{ value: 0, label: 'Westwood Loop' },
-{ value: 1, label: 'Bruin Bear' },
-{ value: 2, label: 'The Hill' }
-]
-
-const timeOpts = [
-  { value: 0, label: "12:00 AM"},
-  { value: 1, label: "1:00 AM"},
-  { value: 2, label: "2:00 AM"},
-  { value: 3, label: "3:00 AM"},
-  { value: 4, label: "4:00 AM"},
-  { value: 5, label: "5:00 AM"},
-  { value: 6, label: "6:00 AM"},
-  { value: 7, label: "7:00 AM"},
-  { value: 8, label: "8:00 AM"},
-  { value: 9, label: "9:00 AM"},
-  { value: 10, label: "10:00 AM"},
-  { value: 11, label: "11:00 AM"},
-  { value: 12, label: "12:00 PM"},
-  { value: 13, label: "1:00 PM"},
-  { value: 14, label: "2:00 PM"},
-  { value: 15, label: "3:00 PM"},
-  { value: 16, label: "4:00 PM"},
-  { value: 17, label: "5:00 PM"},
-  { value: 18, label: "6:00 PM"},
-  { value: 19, label: "7:00 PM"},
-  { value: 20, label: "8:00 PM"},
-  { value: 21, label: "9:00 PM"},
-  { value: 22, label: "10:00 PM"},
-  { value: 23, label: "11:00 PM"}
-]
+//Initialize current date
+const curr = new Date();
+const utcDate = new Date(curr.toUTCString());
+utcDate.setHours(utcDate.getHours()-8);
+const pstcur = new Date(utcDate);
+const date = pstcur.toISOString().substring(0,10);
 
 function Search() {
 
-  const [text, setText] = useState("");
-  const [allRides, setAllRides] = useState([]);
+  const [toRender, setRender] = useState("");
   const [dest, setDest] = useState(null);
-  const [from, setFrom] = useState(null);
   const [dateFilter, setDateFilter] = useState(new Date().toDateString());
   const [fromTimeFilter, setFromTimeFilter] = useState(null);
   const [toTimeFilter, setToTimeFilter] = useState(null);
 
-
+  //On page load, fetch ride data
   useEffect(() => {
-    axios.get("http://localhost:5000/get-all-rides")
-      .then((res) => setAllRides(res.data))
-      .catch((err) => console.log(err));
+    fetchData();
   })
+  
+  //Query database to get ride data and prepare it to be rendered
+  const fetchData = () => {
+    //Call database endpoint
+    axios.get("http://localhost:5000/get-all-rides")
+    .then((res) => {
+      //Update render state to filter based on destination and time (if selected), and upon date. Sort the data and render each ride as an individual component.
+      setRender(res.data.filter(ride => (dest == null ? true : ride.region == dest.target.value) 
+          && (Date.parse(ride.date) >= Date.parse(dateFilter))
+          && (toTimeFilter == null ? true : (parseInt(toTimeFilter.getHours() + 8) % 24 >= parseInt(ride.time.substring(0, ride.time.indexOf(":")))))
+          && (fromTimeFilter == null ? true : (parseInt(fromTimeFilter.getHours() + 8) % 24 <= parseInt(ride.time.substring(0, ride.time.indexOf(":"))))))
+        .sort((a, b) => {
+          let d1 = Date.parse(a.date);
+          let d2 = Date.parse(b.date);
+          return d1 - d2;
+        })
+        .map(ride => <div className="ride"key={ride._id}>
+          <Ride 
+            details={ride}
+            onDelete={fetchData}
+          />
+        </div>)
+      )
+    })
+    .catch((err) => console.log(err));
+  }
 
+  //Render header, filters, and queried ride state. Render a loading bar if queried state is empty. 
   return (
     <div className="App">
       <div className="container">
-        <h1>Search Rides</h1>
+        <div className='searchHeader'>
+          <h1>Search</h1>
+        </div>
         <div>
-            <FormControl fullWidth sx={{m: 1}}>
-              <InputLabel id="DestSelect" >Region</InputLabel>
-              <Select labelId="DestSelect"  onChange={setDest}>
-                  {destLocs.map(loc => <MenuItem value={loc.value}>{loc.value}</MenuItem>)}
-              </Select>
-            </FormControl>
-            { /*<FormControl fullWidth>
-              <InputLabel id="MeetSelect">Meeting</InputLabel>
-              <Select labelId="DestSelect" onChange={setFrom}>
-                  {fromLocs.map(loc => <MenuItem value={loc.value}>{loc.label}</MenuItem>)}
-              </Select>
-            </FormControl> */}
-            <FormControl fullWidth sx={{m: 1}}>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
-                      label="Date"
-                      value={dateFilter}
-                      onChange={(newValue) => {
-                      setDateFilter(newValue);
-                      }}
-                      renderInput={(params) => <TextField {...params} />}
-                  />
-              </LocalizationProvider>
-            </FormControl>
-            <FormControl fullWidth sx={{m: 1}}>
-              <InputLabel id="ToSelect">From Time</InputLabel>
-              <Select labelId="ToSelect"  options={fromLocs} onChange={setToTimeFilter}>
-                  {timeOpts.map(loc => <MenuItem value={loc.value}>{loc.label}</MenuItem>)}
-              </Select>
-            </FormControl>
-            <FormControl fullWidth sx={{m: 1}}>
-              <InputLabel id="FromSelect">To Time</InputLabel>
-              <Select labelId="FromSelect" options={fromLocs} onChange={setFromTimeFilter}>
-                  {timeOpts.map(loc => <MenuItem value={loc.value}>{loc.label}</MenuItem>)}
-              </Select>
-            </FormControl>
-
+          <div className='filter'>
+            <div class="filterField">
+              <label className="filterLabel">Destination</label>
+              {
+                dest ?
+                <Button className="clearButton" variant="contained" color="primary" sx={{m: 1}}  onClick={() => {setDest(null);  const $select = document.querySelector('#destSelect');  $select.value = 'default'}}>Clear</Button>
+              : null}
+              <div className="selectWrapper">
+                <select className="selectBox" onChange={setDest} id="destSelect">
+                  <option value="default" disabled selected>Destination</option>
+                  {destLocs.map(loc => <option value={loc.value}>{loc.value}</option>)}
+                </select>
+              </div>
+            </div>
+            <div class="filterField">
+              <label className="filterLabel">Date</label>
+              {
+                dateFilter != new Date().toDateString() ?
+                <Button className="clearButton" variant="contained" color="primary" sx={{m: 1}} hidden="true" onClick={() => {setDateFilter(new Date().toDateString() );  const $select = document.querySelector('#dateFilter');  $select.value = date}}>Clear</Button>
+              : null}
+              <input name="date" type="date" label="Date" id="dateFilter" defaultValue={date} onChange={(ev) => 
+                { 
+                  const date = new Date(ev.target.valueAsDate);
+                  setDateFilter(date.toUTCString())}
+                }>
+              </input>
+            </div>
+            <div class="filterField">
+              <label className="filterLabel">From Time</label>
+              {
+                fromTimeFilter ?
+                <Button className="clearButton" variant="contained" color="primary" sx={{m: 1}} hidden="true" onClick={() => {setFromTimeFilter(null);  const $select = document.querySelector('#fromFilter');  $select.value = ""}}>Clear</Button>
+              : null}
+            <input name="fromTime" type="time" label="FromTime" id="fromFilter" onChange={(ev) => {setFromTimeFilter(ev.target.valueAsDate)}}></input>
+          </div>
+            <div class="filterField">
+              <label className="filterLabel">To Time</label>
+              {
+                toTimeFilter ?
+                <Button className="clearButton" variant="contained" color="primary" sx={{m: 1}} hidden="true" onClick={() => {setToTimeFilter(null);  const $select = document.querySelector('#toFilter');  $select.value = ""}}>Clear</Button>
+              : null}
+              <input name="toTime" type="time" label="toTime" id="toFilter" onChange={(ev) => {setToTimeFilter(ev.target.valueAsDate)}}></input>
+            </div>
+          </div>
         </div>
 
-        <div className="list">
-            {allRides.filter(ride => (dest == null ? true : ride.region == dest.target.value) 
-                            && (from == null ? true : ride.meetPlc == from.target.value)
-                            && (Date.parse(ride.date) > Date.parse(dateFilter))
-                            && (toTimeFilter == null ? true : ((toTimeFilter.target.value) <= parseInt(ride.time.substring(0, ride.time.indexOf(":")))))
-                            && (fromTimeFilter == null ? true : ((fromTimeFilter.target.value) >= parseInt(ride.time.substring(0, ride.time.indexOf(":"))))))
-            .sort((a, b) => {
-              let d1 = Date.parse(a.date);
-              let d2 = Date.parse(b.date);
-              return d1 - d2;
-            })
-            .map(ride => <Ride
-            key={ride._id}
-            details={ride}
-            />)}
+        <div classname="list">
+          {toRender ?
+            <div className='rides'>
+              {toRender} 
+            </div>
+            :
+            <center>
+              <ProgressBar
+                height="80"
+                width="160"
+                ariaLabel="progress-bar-loading"
+                wrapperStyle={{}}
+                wrapperClass="progress-bar-wrapper"
+                borderColor = '#eed445'
+                barColor = '#2773ad'
+                />
+            </center>
+          }
         </div>
       </div>
     </div>

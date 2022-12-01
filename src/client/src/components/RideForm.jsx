@@ -15,24 +15,27 @@ const RideForm = () => {
     date: "",
     time: "",
     desc: "",
-    grpSize: 0
+    grpSize: "2"
   });
   const destination = values.destination
   const date = values.date
   const time = values.time
   const desc = values.desc
-  const grpSize = values.grpSize
+  const grpSize = parseInt(values.grpSize)
   const riders = [user];
 
   const [sel, setSel] = useState("");
   const [region, setRegion] = useState("");
 
+  //Upon clicking add ride, call database endpoint to add a new ride to our database
   const AddRide = () => {
     axios.post("http://localhost:5000/save-ride", { region, destination, date, time, desc, grpSize, riders })
       .then((res) => {
         console.log(res.data_id);
         const rideID = res.data._id
         console.log({user, rideID})
+
+        //Update user entry in database to include new ride id
         axios.post("http://localhost:5000/auth/update-user-rides-by-id", { user, rideID })
         .then((res) => {
           setValues({
@@ -40,9 +43,11 @@ const RideForm = () => {
             date: "",
             time: "",
             desc: "",
-            grpSize: 0
+            grpSize: "2"
           });
           setRegion("")
+
+          //Navigate to search page on success
           navigate("/search");
         }) 
         .catch((err) => console.log(err));
@@ -50,6 +55,7 @@ const RideForm = () => {
       .catch((err) => console.log(err));
   }
 
+  //Ride regions
   const options = [
     { key: 1, value: "LAX" },
     { key: 2, value: "Downtown" },
@@ -61,6 +67,14 @@ const RideForm = () => {
 
   const locations = ["LAX", "Downtown", "Hollywood", "Koreatown", "Santa Monica", "Burbank"]
 
+  const curr = new Date();
+  const utcDate = new Date(curr.toUTCString());
+  utcDate.setHours(utcDate.getHours()-8);
+  const pstcur = new Date(utcDate);
+  const currDate = pstcur.toISOString().substring(0,10);
+  
+
+  //Initializing props for ride form input fields
   const inputs = [
     {
       id: 1,
@@ -73,9 +87,12 @@ const RideForm = () => {
     {
       id: 2,
       name: "grpSize",
-      type: "number",
+      type: "text",
       placeholder: "Group Limit",
       label: "Group Limit",
+      errorMessage:
+        "Group limit must be integer greater than 2",
+      pattern: `^[0-9]*$`,
       required: true,
     },
     {
@@ -85,6 +102,7 @@ const RideForm = () => {
       placeholder: "Date",
       label: "Date",
       required: true,
+      min: currDate
     },
     {
         id: 4,
@@ -100,34 +118,36 @@ const RideForm = () => {
         type: "text",
         placeholder: "Put any extra information here",
         label: "Description",
+        required: true,
     },
     
   ];
 
+  //Upon submit, call make sure fields are not default and call add ride function
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputs)
     AddRide();
-    //e.preventDefault();
   };
 
+  //Define function to update state from changes in input fields
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  //Return ride form with header, a select component for the region, and input fields aligning with the prop array
   return (
-    <div className="rform">
+    <div>
       <form onSubmit={handleSubmit}>
-        <h1>Add Ride</h1>
+      <h1>Add Ride</h1>
         <SelectComponent
-            options={options}
-            onChange={(item) => {
-                setSel(item);
-                setRegion(locations[item - 1]);
-            }}
-            selectedKey={sel}
-            placeholder={"What region are you going to?"}
-            label="Region"
+          options={options}
+          onChange={(item) => {
+              setSel(item);
+              setRegion(locations[item - 1]);
+          }}
+          selectedKey={sel}
+          placeholder={"What region are you going to?"}
+          label="Region"
         />
         {inputs.map((input) => (
             <AddInput

@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react';
-import axios from "axios";
-
-import '../App.css';
-import RideComponent from './RideComponent'
 import Register from './Register';
 
+import '../App.css';
+
+//Render sign up page by rendering register component
 function SignUp() {
   return (
     <div className="App">
